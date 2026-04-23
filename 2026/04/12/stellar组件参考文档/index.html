@@ -1,0 +1,1533 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  
+  
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>Stellar 主题组件参考文档 - 哈基米的知识库</title>
+
+  
+    <meta name="description" content="Stellar 主题所有标签组件完整参考，含表达类（33+）、数据类（8）、容器类（8）组件的语法与示例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stellar 主题组件参考文档">
+<meta property="og:url" content="https://blog.yeuer.com/2026/04/12/stellar%E7%BB%84%E4%BB%B6%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3/">
+<meta property="og:site_name" content="哈基米的知识库">
+<meta property="og:description" content="Stellar 主题所有标签组件完整参考，含表达类（33+）、数据类（8）、容器类（8）组件的语法与示例">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-12T04:50:00.000Z">
+<meta property="article:modified_time" content="2026-04-12T05:34:12.000Z">
+<meta property="article:author" content="哈基米">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Stellar">
+<meta property="article:tag" content="知识库">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="知识库,Hexo,Stellar">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"dateCreated":"2026-04-12T12:50:00+08:00","dateModified":"2026-04-12T13:34:12+08:00","datePublished":"2026-04-12T12:50:00+08:00","description":"Stellar 主题表达类、数据类、容器类标签组件完整参考文档，含 33+ 表达组件、8 个数据组件、8 个容器组件的语法与示例代码。","headline":"Stellar 主题组件参考文档","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.yeuer.com/2026/04/12/stellar%E7%BB%84%E4%BB%B6%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3/"},"publisher":{"@type":"Organization","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"url":"https://blog.yeuer.com/2026/04/12/stellar%E7%BB%84%E4%BB%B6%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3/","keywords":"知识库, Hexo, Stellar","image":[]}</script>
+  
+</head>
+<body><div id="l_cover"></div><div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/img/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">哈基米的知识库</div><div class="sub cap">记录与复盘</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2026/04/22/2026-04-21-%E6%A8%A1%E6%8B%9F%E7%9B%98%E6%9C%88%E5%BA%A6%E5%A4%8D%E7%9B%98/"><span class="title">模拟盘月度复盘 | 2026年4月</span></a><a class="item title" href="/2026/04/23/2026-04-23-%E6%A8%A1%E6%8B%9F%E7%9B%98%E8%AE%B0%E5%BD%95/"><span class="title">模拟盘记录 | 2026-04-23</span></a><a class="item title" href="/2026/04/22/2026-04-22-%E6%A8%A1%E6%8B%9F%E7%9B%98%E8%AE%B0%E5%BD%95/"><span class="title">模拟盘记录 | 2026-04-22</span></a><a class="item title" href="/2026/04/21/2026-04-21-%E6%A8%A1%E6%8B%9F%E7%9B%98%E8%AE%B0%E5%BD%95/"><span class="title">模拟盘记录 | 2026-04-21</span></a><a class="item title" href="/2026/04/07/2026-04-07-%E7%82%92%E8%82%A1%E6%84%9F%E6%82%9F/"><span class="title">炒股至今领悟的两个道理</span></a><a class="item title" href="/2026/04/09/2026-04-09-%E6%A8%A1%E6%8B%9F%E7%9B%98%E8%AE%B0%E5%BD%95/"><span class="title">模拟盘记录 | 2026-04-09</span></a><a class="item title" href="/2026/04/10/2026-04-10-%E6%A8%A1%E6%8B%9F%E7%9B%98%E8%AE%B0%E5%BD%95/"><span class="title">模拟盘记录 | 2026-04-10</span></a><a class="item title" href="/2026/04/07/2026-04-07-%E6%A8%A1%E6%8B%9F%E7%9B%98%E8%AE%B0%E5%BD%95/"><span class="title">模拟盘记录 | 2026-04-07</span></a><a class="item title" href="/2026/04/08/2026-04-08-%E6%A8%A1%E6%8B%9F%E7%9B%98%E8%AE%B0%E5%BD%95/"><span class="title">模拟盘记录 | 2026-04-08</span></a><a class="item title" href="/2026/04/15/2026-04-15-%E6%A8%A1%E6%8B%9F%E7%9B%98%E8%AE%B0%E5%BD%95/"><span class="title">模拟盘记录 | 2026-04-15</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/">知识库</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2026-04-12T04:50:00.000Z">2026-04-12</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-04-12T05:34:12.000Z">2026-04-12</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>Stellar 主题组件参考文档</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><blockquote>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://xaoxuu.com/wiki/stellar/">https://xaoxuu.com/wiki/stellar/</a><br>主题版本：Stellar 1.33.1</p>
+</blockquote>
+<hr>
+<h2 id="一、Front-matter-字段"><a href="#一、Front-matter-字段" class="headerlink" title="一、Front-matter 字段"></a>一、Front-matter 字段</h2><h3 id="1-1-Hexo-内置字段"><a href="#1-1-Hexo-内置字段" class="headerlink" title="1.1 Hexo 内置字段"></a>1.1 Hexo 内置字段</h3><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>layout</code></td>
+<td>布局</td>
+<td>post</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>标题</td>
+<td>文件名</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>建立日期</td>
+<td>文件建立日期</td>
+</tr>
+<tr>
+<td><code>updated</code></td>
+<td>更新日期</td>
+<td>文件更新日期</td>
+</tr>
+<tr>
+<td><code>sticky</code></td>
+<td>置顶（数字越大越靠前）</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>comments</code></td>
+<td>开启评论功能</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>标签</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>categories</code></td>
+<td>分类</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>permalink</code></td>
+<td>覆盖永久链接</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>excerpt</code></td>
+<td>纯文本摘要</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>lang</code></td>
+<td>设置语言</td>
+<td>继承自 _config.yml</td>
+</tr>
+</tbody></table>
+<h3 id="1-2-Stellar-特有字段"><a href="#1-2-Stellar-特有字段" class="headerlink" title="1.2 Stellar 特有字段"></a>1.2 Stellar 特有字段</h3><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+<th>可用版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>type</code></td>
+<td>页面类型：<code>tech</code>（技术文）或 <code>story</code>（图文）</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>poster</code></td>
+<td>封面信息：<code>topic</code>&#x2F;<code>headline</code>&#x2F;<code>caption</code>&#x2F;<code>color</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>banner</code></td>
+<td>顶部横幅背景</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>banner_info</code></td>
+<td>横幅信息：<code>avatar</code>&#x2F;<code>title</code>&#x2F;<code>subtitle</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>indent</code></td>
+<td>段落缩进</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>topic</code></td>
+<td>所属话题&#x2F;专栏</td>
+<td>1.25+</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>文章作者</td>
+<td>1.23+</td>
+</tr>
+<tr>
+<td><code>menu_id</code></td>
+<td>高亮的菜单按钮 id</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>leftbar</code></td>
+<td>左侧边栏配置</td>
+<td>1.27+</td>
+</tr>
+<tr>
+<td><code>rightbar</code></td>
+<td>右侧边栏配置</td>
+<td>1.27+</td>
+</tr>
+<tr>
+<td><code>indexing</code></td>
+<td>页面是否可被搜索</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>references</code></td>
+<td>参考资料列表</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>h1</code></td>
+<td>页内标题</td>
+<td>1.26+</td>
+</tr>
+<tr>
+<td><code>comment_title</code></td>
+<td>评论区标题</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>wiki</code></td>
+<td>该页面所属的 wiki 项目</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h3 id="1-3-封面与摘要"><a href="#1-3-封面与摘要" class="headerlink" title="1.3 封面与摘要"></a>1.3 封面与摘要</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文章封面（Stellar v1.14+ 推荐使用 poster）</span></span><br><span class="line"><span class="attr">poster:</span></span><br><span class="line">  <span class="attr">topic:</span> <span class="string">标题上方小字</span></span><br><span class="line">  <span class="attr">headline:</span> <span class="string">大标题</span></span><br><span class="line">  <span class="attr">caption:</span> <span class="string">标题下方小字</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">标题颜色</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 手动摘要（&lt;!-- more --&gt; 之前为摘要）</span></span><br><span class="line"><span class="string">正文内容...</span></span><br><span class="line"></span><br><span class="line"><span class="string">&lt;!--</span> <span class="string">more</span> <span class="string">--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="string">正文（主页不显示）...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动摘要（在 _config.stellar.yml 中设置）</span></span><br><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="attr">auto_excerpt:</span> <span class="number">200</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二、表达类标签组件（33-个）"><a href="#二、表达类标签组件（33-个）" class="headerlink" title="二、表达类标签组件（33+ 个）"></a>二、表达类标签组件（33+ 个）</h2><h3 id="2-1-emoji-表情包"><a href="#2-1-emoji-表情包" class="headerlink" title="2.1 emoji 表情包"></a>2.1 emoji 表情包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% emoji [source] name [height:1.75em] %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表情速查表：<a target="_blank" rel="noopener" href="https://weekdaycare.cn/posts/emoji-blob/">https://weekdaycare.cn/posts/emoji-blob/</a></p>
+<p>配置示例（<code>_config.stellar.yml</code>）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tag_plugins:</span></span><br><span class="line">  <span class="attr">emoji:</span></span><br><span class="line">    <span class="attr">default:</span> <span class="string">https://gcore.jsdelivr.net/gh/cdn-x/emoticons/qq/&#123;name&#125;.gif</span></span><br><span class="line">    <span class="attr">twemoji:</span> <span class="string">https://gcore.jsdelivr.net/gh/twitter/twemoji/assets/svg/&#123;name&#125;.svg</span></span><br><span class="line">    <span class="attr">qq:</span> <span class="string">https://gcore.jsdelivr.net/gh/cdn-x/emoticons/qq/&#123;name&#125;.gif</span></span><br><span class="line">    <span class="attr">tieba:</span> <span class="string">https://gcore.jsdelivr.net/gh/cdn-x/emoticons/tieba/&#123;name&#125;.png</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-2-icon-图标"><a href="#2-2-icon-图标" class="headerlink" title="2.2 icon 图标"></a>2.2 icon 图标</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;% icon solar:planet-bold-duotone %&#125;                    <span class="comment">&lt;!-- 图标集 --&gt;</span></span><br><span class="line">&#123;% icon https://api.iconify.design/solar:link.svg %&#125;    <span class="comment">&lt;!-- 外链 --&gt;</span></span><br><span class="line">&#123;% icon ph:seal-question-fill color:red %&#125;              <span class="comment">&lt;!-- 指定颜色 --&gt;</span></span><br><span class="line">&#123;% icon https://xxx.svg style:transform:scale(1.2) %&#125;  <span class="comment">&lt;!-- 自定义样式 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>图标库：<a target="_blank" rel="noopener" href="https://icon-sets.iconify.design/">https://icon-sets.iconify.design/</a><br>推荐图标集：solar、ph、mdi、bi</p>
+</blockquote>
+<p>配置默认颜色：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tag_plugins:</span></span><br><span class="line">  <span class="attr">icon:</span></span><br><span class="line">    <span class="attr">default_color:</span> <span class="string">accent</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-3-vote-投票"><a href="#2-3-vote-投票" class="headerlink" title="2.3 vote 投票"></a>2.3 vote 投票</h3><blockquote>
+<p>需要自部署 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/star-vote">star-vote</a>（1.33.0+）</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% vote id:default 你的问题？ %&#125;</span><br><span class="line">&#123;% vote id:default yes:solar:round-double-alt-arrow-up-bold no:solar:round-double-alt-arrow-down-bold 自定义图标 %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-4-rating-评分"><a href="#2-4-rating-评分" class="headerlink" title="2.4 rating 评分"></a>2.4 rating 评分</h3><blockquote>
+<p>需要自部署 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/star-vote">star-vote</a>（1.33.0+）</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% rating id:default 给这篇文章打分吧～ %&#125;</span><br><span class="line">&#123;% rating id:default icon:https://api.iconify.design/twemoji:star-struck.svg 自定义图标 %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-5-mark-标记（12-色）"><a href="#2-5-mark-标记（12-色）" class="headerlink" title="2.5 mark 标记（12 色）"></a>2.5 mark 标记（12 色）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;% mark 默认 %&#125;</span><br><span class="line">&#123;% mark 红 color:red %&#125;</span><br><span class="line">&#123;% mark 橙 color:orange %&#125;</span><br><span class="line">&#123;% mark 黄 color:yellow %&#125;</span><br><span class="line">&#123;% mark 绿 color:green %&#125;</span><br><span class="line">&#123;% mark 青 color:cyan %&#125;</span><br><span class="line">&#123;% mark 蓝 color:blue %&#125;</span><br><span class="line">&#123;% mark 紫 color:purple %&#125;</span><br><span class="line">&#123;% mark 亮 color:light %&#125;</span><br><span class="line">&#123;% mark 暗 color:dark %&#125;</span><br><span class="line">&#123;% mark 警告 color:warning %&#125;</span><br><span class="line">&#123;% mark 错误 color:error %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-6-hashtag-标签"><a href="#2-6-hashtag-标签" class="headerlink" title="2.6 hashtag 标签"></a>2.6 hashtag 标签</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% hashtag Stellar https://xaoxuu.com/wiki/stellar/ %&#125;</span><br><span class="line">&#123;% hashtag GitHub https://github.com/ color:green %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-7-image-图片"><a href="#2-7-image-图片" class="headerlink" title="2.7 image 图片"></a>2.7 image 图片</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% image src [描述] [download:bool|string] [width:px] [padding:px] [bg:hex] [fancybox:bool|string] [ratio:w/h] %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>横向铺满（加下载按钮）：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% image https://xxx.jpg 图片描述 download:true %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>竖图（小图）布局优化：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% image https://xxx.jpg width:200px padding:16px bg:&#x27;#ffffff&#x27; %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Fancybox 点击放大（自动加载）：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% image https://xxx.jpg fancybox:true %&#125;</span><br><span class="line">&#123;% image https://小图.jpg fancybox:大图链接 %&#125;  <span class="comment">&lt;!-- 缩略图+高清 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>全站开启 Fancybox（<code>_config.stellar.yml</code>）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tag_plugins:</span></span><br><span class="line">  <span class="attr">image:</span></span><br><span class="line">    <span class="attr">fancybox:</span> <span class="literal">false</span>  <span class="comment"># 默认关闭，按需开启</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-8-blockquote-段落引用"><a href="#2-8-blockquote-段落引用" class="headerlink" title="2.8 blockquote 段落引用"></a>2.8 blockquote 段落引用</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% blockquote %&#125;</span><br><span class="line">这是使用 blockquote 标签的例子</span><br><span class="line">&#123;% endblockquote %&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>&gt; 引用</code> 写法在技术文章中样式不同；blockquote 标签始终为非技术文章样式。</p>
+</blockquote>
+<hr>
+<h3 id="2-9-quot-强调引用"><a href="#2-9-quot-强调引用" class="headerlink" title="2.9 quot 强调引用"></a>2.9 quot 强调引用</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;% quot Stellar 是迄今为止最好用的主题 %&#125;</span><br><span class="line">&#123;% quot 热门话题 icon:hashtag %&#125;</span><br><span class="line">&#123;% quot 特别引用 icon:default %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 自定义图标 --&gt;</span></span><br><span class="line">&#123;% quot icons.yml示例 prefix:solar:planet-bold-duotone %&#125;</span><br><span class="line">&#123;% quot URL示例 prefix:https://... suffix:https://... %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 作为标题使用 --&gt;</span></span><br><span class="line">&#123;% quot 标题 el:h3 %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置默认引号（<code>_config.stellar.yml</code>）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tag_plugins:</span></span><br><span class="line">  <span class="attr">quot:</span></span><br><span class="line">    <span class="attr">default:</span></span><br><span class="line">      <span class="attr">prefix:</span> <span class="string">bxs:quote-left</span></span><br><span class="line">      <span class="attr">suffix:</span> <span class="string">bxs:quote-right</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-10-poetry-诗词"><a href="#2-10-poetry-诗词" class="headerlink" title="2.10 poetry 诗词"></a>2.10 poetry 诗词</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% poetry 标题 author:作者 footer:注 %&#125;</span><br><span class="line">正文</span><br><span class="line">&#123;% endpoetry %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-11-paper-纸张"><a href="#2-11-paper-纸张" class="headerlink" title="2.11 paper 纸张"></a>2.11 paper 纸张</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% paper style:underline title:文言文 author:诸葛亮 date:三国 footer:节选 %&#125;</span><br><span class="line"><span class="comment">&lt;!-- line left --&gt;</span></span><br><span class="line">标题</span><br><span class="line"><span class="comment">&lt;!-- paragraph --&gt;</span></span><br><span class="line">正文段落（首行缩进）</span><br><span class="line"><span class="comment">&lt;!-- line right --&gt;</span></span><br><span class="line">右对齐段落</span><br><span class="line">&#123;% endpaper %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可选参数：<code>style: underline/无</code>、<code>title</code>、<code>author</code>、<code>date</code>、<code>footer</code></p>
+<hr>
+<h3 id="2-12-reel-卷轴"><a href="#2-12-reel-卷轴" class="headerlink" title="2.12 reel 卷轴"></a>2.12 reel 卷轴</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% reel 标题 author:作者 date:日期 footer:注 %&#125;</span><br><span class="line">正文</span><br><span class="line">&#123;% endreel %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-13-note-备注块（12-色）"><a href="#2-13-note-备注块（12-色）" class="headerlink" title="2.13 note 备注块（12 色）"></a>2.13 note 备注块（12 色）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% note 这是标题 这是正文。 %&#125;</span><br><span class="line">&#123;% note color:green 正文内容 %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>颜色支持：<code>red</code>、<code>orange</code>、<code>amber</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>purple</code>、<code>light</code>、<code>dark</code>、<code>warning</code>、<code>error</code></p>
+<hr>
+<h3 id="2-14-link-链接卡片"><a href="#2-14-link-链接卡片" class="headerlink" title="2.14 link 链接卡片"></a>2.14 link 链接卡片</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% link https://example.com %&#125;</span><br><span class="line">&#123;% link https://example.com desc:true %&#125;</span><br><span class="line">&#123;% link https://example.com 自定义标题 icon:https://xxx.png desc:true %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自部署 siteinfo API 并在 <code>_config.stellar.yml</code> 中配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">data_services:</span></span><br><span class="line">  <span class="attr">siteinfo:</span></span><br><span class="line">    <span class="attr">api:</span> <span class="string">https://你的api地址</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-15-button-按钮"><a href="#2-15-button-按钮" class="headerlink" title="2.15 button 按钮"></a>2.15 button 按钮</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% button 探索 https://github.com/ icon:solar:planet-bold-duotone %&#125;</span><br><span class="line">&#123;% button 按钮名 https://url color:orange size:xs %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-16-okr-目标管理"><a href="#2-16-okr-目标管理" class="headerlink" title="2.16 okr 目标管理"></a>2.16 okr 目标管理</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;% okr o1 %&#125;</span><br><span class="line">2077年目标：完成 Volantis 6.0 并发布上线</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- okr kr1 percent:100 --&gt;</span></span><br><span class="line">重构 tag-plugins</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- okr kr2 percent:90 status:off_track --&gt;</span></span><br><span class="line">完成主要页面设计稿</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- okr kr3 percent:-12 status:unfinished --&gt;</span></span><br><span class="line">完成前置准备工作</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- okr kr-4 status:at_risk --&gt;</span></span><br><span class="line">开发、测试和发布</span><br><span class="line"></span><br><span class="line">&#123;% endokr %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>OKR 状态：<code>completed</code>（100%）、<code>off_track</code>（延期）、<code>unfinished</code>（未完成）、<code>at_risk</code>（风险）、<code>正常</code>（默认）</p>
+<hr>
+<h3 id="2-17-copy-复制行"><a href="#2-17-copy-复制行" class="headerlink" title="2.17 copy 复制行"></a>2.17 copy 复制行</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% copy curl -s https://sh.xaox.cc/install | sh %&#125;</span><br><span class="line">&#123;% copy curl -s https://... prefix:$ %&#125;  <span class="comment">&lt;!-- 带 $ 提示符 --&gt;</span></span><br><span class="line">&#123;% copy git:https xaoxuu.com/hexo-theme-stellar %&#125;</span><br><span class="line">&#123;% copy git:ssh xaoxuu.com/hexo-theme-stellar %&#125;</span><br><span class="line">&#123;% copy git:gh xaoxuu.com/hexo-theme-stellar %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-18-radio-单选"><a href="#2-18-radio-单选" class="headerlink" title="2.18 radio 单选"></a>2.18 radio 单选</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% radio 没有勾选的单选框 %&#125;</span><br><span class="line">&#123;% radio checked:true 已勾选的单选框 %&#125;</span><br><span class="line">&#123;% radio checked:true color:green 绿色选中 %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可选参数：<code>checked:true/false</code>、<code>color:red/orange/yellow/green/cyan/blue/purple</code></p>
+<hr>
+<h3 id="2-19-checkbox-复选"><a href="#2-19-checkbox-复选" class="headerlink" title="2.19 checkbox 复选"></a>2.19 checkbox 复选</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% checkbox 普通的没有勾选的复选框 %&#125;</span><br><span class="line">&#123;% checkbox checked:true 普通的已勾选 %&#125;</span><br><span class="line">&#123;% checkbox symbol:plus color:green checked:true 显示为加号的绿色勾选 %&#125;</span><br><span class="line">&#123;% checkbox symbol:minus color:yellow checked:true 显示为减号的黄色勾选 %&#125;</span><br><span class="line">&#123;% checkbox symbol:times color:red checked:true 显示为乘号的红色勾选 %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可选参数：<code>checked:true/false</code>、<code>color:...</code>、<code>symbol:plus/minus/times</code></p>
+<hr>
+<h3 id="2-20-audio-音频"><a href="#2-20-audio-音频" class="headerlink" title="2.20 audio 音频"></a>2.20 audio 音频</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;% audio https://example.com/audio.mp3 %&#125;</span><br><span class="line">&#123;% audio netease:1856385686 %&#125;              <span class="comment">&lt;!-- 网易云 --&gt;</span></span><br><span class="line">&#123;% audio type:2 netease:1856385686 %&#125;        <span class="comment">&lt;!-- type:2 歌单 / 0 单曲 --&gt;</span></span><br><span class="line">&#123;% audio netease:1856385686 autoplay:1 %&#125;    <span class="comment">&lt;!-- autoplay 自动播放 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-21-video-视频"><a href="#2-21-video-视频" class="headerlink" title="2.21 video 视频"></a>2.21 video 视频</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;% video bilibili:BV1GP4y1d729 %&#125;</span><br><span class="line">&#123;% video youtube:LB8KwiiUGy0 %&#125;</span><br><span class="line">&#123;% video https://example.com/video.mp4 %&#125;</span><br><span class="line">&#123;% video bilibili:BV1GP4y1d729 width:100% autoplay:0 %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可选参数：<code>width</code>、<code>autoplay:1/0</code>；bilibili 和 youtube 可设置 <code>width</code> 和 <code>autoplay</code></p>
+<hr>
+<h3 id="2-22-chat-聊天"><a href="#2-22-chat-聊天" class="headerlink" title="2.22 chat 聊天"></a>2.22 chat 聊天</h3><blockquote>
+<p>需要配置 <code>chat_users.yaml</code>，支持 QQ 和微信风格。<br>示例和文档：<a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/pull/560">https://github.com/xaoxuu/hexo-theme-stellar/pull/560</a></p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% chat 用户名 消息内容 %&#125;</span><br><span class="line">&#123;% chat 用户名 %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-23-navbar-导航栏"><a href="#2-23-navbar-导航栏" class="headerlink" title="2.23 navbar 导航栏"></a>2.23 navbar 导航栏</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% navbar active:/wiki/ [文章](/) [项目](/wiki/) [留言](#comments) [GitHub](https://github.com/) %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>active</code> 传入要高亮的按钮 URL。</p>
+<hr>
+<h3 id="2-24-frame-设备框架"><a href="#2-24-frame-设备框架" class="headerlink" title="2.24 frame 设备框架"></a>2.24 frame 设备框架</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% frame iphone11 img:https://xxx.png video:https://xxx.mp4 focus:top %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可选参数：<code>focus:top/bottom</code>，支持 iPhone 等设备框架。</p>
+<hr>
+<h3 id="2-25-文本修饰标签集"><a href="#2-25-文本修饰标签集" class="headerlink" title="2.25 文本修饰标签集"></a>2.25 文本修饰标签集</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;% blur 高斯模糊 %&#125;</span><br><span class="line">&#123;% password 密码效果 %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">u</span>&gt;</span>下划线<span class="tag">&lt;/<span class="name">u</span>&gt;</span>                      <span class="comment">&lt;!-- HTML 原生 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">em</span>&gt;</span>着重号<span class="tag">&lt;/<span class="name">em</span>&gt;</span>                    <span class="comment">&lt;!-- HTML 原生 --&gt;</span></span><br><span class="line">&#123;% wave 波浪线 %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">s</span>&gt;</span>删除线<span class="tag">&lt;/<span class="name">s</span>&gt;</span>                      <span class="comment">&lt;!-- HTML 原生 --&gt;</span></span><br><span class="line">&#123;% sup 上角标 %&#125;</span><br><span class="line">&#123;% sub 下角标 %&#125;</span><br><span class="line">&#123;% kbd ⌘ %&#125; + &#123;% kbd D %&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>着重号、下划线、删除线等也可以直接使用 HTML 原生标签。</p>
+</blockquote>
+<hr>
+<h2 id="三、数据类标签组件（8-个）"><a href="#三、数据类标签组件（8-个）" class="headerlink" title="三、数据类标签组件（8 个）"></a>三、数据类标签组件（8 个）</h2><h3 id="3-1-timeline-时间线"><a href="#3-1-timeline-时间线" class="headerlink" title="3.1 timeline 时间线"></a>3.1 timeline 时间线</h3><p><strong>静态写法：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% timeline %&#125;</span><br><span class="line"><span class="comment">&lt;!-- node 2021年2月16日 --&gt;</span></span><br><span class="line">内容</span><br><span class="line"><span class="comment">&lt;!-- node 2021年2月11日 --&gt;</span></span><br><span class="line">内容</span><br><span class="line">&#123;% endtimeline %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>动态写法（GitHub Issues）：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;% timeline api:https://api.github.com/repos/your-name/repo/issues %&#125;&#123;% endtimeline %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 升序，限3条 --&gt;</span></span><br><span class="line">&#123;% timeline api:.../issues?direction=asc&amp;per_page=3 %&#125;&#123;% endtimeline %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 按评论数排序 --&gt;</span></span><br><span class="line">&#123;% timeline api:.../issues?sort=comments %&#125;&#123;% endtimeline %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 只显示某人 --&gt;</span></span><br><span class="line">&#123;% timeline user:username api:... %&#125;&#123;% endtimeline %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- GitHub Releases --&gt;</span></span><br><span class="line">&#123;% timeline api:https://api.github.com/repos/owner/repo/releases %&#125;&#123;% endtimeline %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>微博动态：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% timeline limit:20 type:weibo api:你的json文件地址 %&#125;&#123;% endtimeline %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>静态+动态混合：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;% timeline reversed:true api:https://...data.json %&#125;</span><br><span class="line"><span class="comment">&lt;!-- node 静态内容 --&gt;</span></span><br><span class="line">静态内容</span><br><span class="line">&#123;% endtimeline %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-2-friends-友链"><a href="#3-2-friends-友链" class="headerlink" title="3.2 friends 友链"></a>3.2 friends 友链</h3><p><strong>静态数据</strong>（<code>source/_data/links/xxx.yml</code>）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">title:</span> <span class="string">某某某</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">https://example.com</span></span><br><span class="line">  <span class="attr">cover:</span> <span class="string">https://cover.jpg</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">https://icon.png</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">简介</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">知识库</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% friends xxx %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>动态友链（GitHub Issues）：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% friends api:https://raw.github.com/xxx/friends/output/v2/data.json %&#125;</span><br><span class="line">&#123;% friends posts:true api:... %&#125;  <span class="comment">&lt;!-- 带文章聚合 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-3-sites-网站卡片"><a href="#3-3-sites-网站卡片" class="headerlink" title="3.3 sites 网站卡片"></a>3.3 sites 网站卡片</h3><p><strong>静态数据</strong>（<code>source/_data/links/分组名.yml</code>）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">title:</span> <span class="string">标题</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">https://example.com</span></span><br><span class="line">  <span class="attr">cover:</span> <span class="string">https://cover.jpg</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">简介</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">知识库</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% sites 分组名 %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-4-albums-专辑"><a href="#3-4-albums-专辑" class="headerlink" title="3.4 albums 专辑"></a>3.4 albums 专辑</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% albums 分组名 %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>数据文件写法同 friends&#x2F;sites。</p>
+<hr>
+<h3 id="3-5-posters-海报"><a href="#3-5-posters-海报" class="headerlink" title="3.5 posters 海报"></a>3.5 posters 海报</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% posters 分组名 %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-6-md-渲染外部-Markdown"><a href="#3-6-md-渲染外部-Markdown" class="headerlink" title="3.6 md 渲染外部 Markdown"></a>3.6 md 渲染外部 Markdown</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% folding %&#125;</span><br><span class="line">&#123;% md https://gcore.jsdelivr.net/gh/xaoxuu/hexo-theme-stellar/README.md %&#125;</span><br><span class="line">&#123;% endfolding %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-7-ghcard-GitHub-卡片"><a href="#3-7-ghcard-GitHub-卡片" class="headerlink" title="3.7 ghcard GitHub 卡片"></a>3.7 ghcard GitHub 卡片</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% ghcard xaoxuu %&#125;</span><br><span class="line">&#123;% ghcard xaoxuu/hexo-theme-stellar theme:dark %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可选参数：<code>theme:dark/light</code>、<code>var_color</code>、<code>hide_border</code>、<code>theme:...</code></p>
+<hr>
+<h3 id="3-8-toc-文档目录树"><a href="#3-8-toc-文档目录树" class="headerlink" title="3.8 toc 文档目录树"></a>3.8 toc 文档目录树</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% toc wiki:xxx [open:true] [display:mobile] [title] %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、容器类标签组件（8-个）"><a href="#四、容器类标签组件（8-个）" class="headerlink" title="四、容器类标签组件（8 个）"></a>四、容器类标签组件（8 个）</h2><h3 id="4-1-box-盒子容器"><a href="#4-1-box-盒子容器" class="headerlink" title="4.1 box 盒子容器"></a>4.1 box 盒子容器</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% box [标题] [color:color] [child:codeblock/tabs] %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% endbox %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>彩色代码块（10 种颜色）：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% box 推荐写法 color:green child:codeblock %&#125;</span><br><span class="line">func test() &#123;&#125;</span><br><span class="line">&#123;% endbox %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>嵌套多段代码块：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% box %&#125;</span><br><span class="line">发送端</span><br><span class="line">(void)test &#123; ... &#125;</span><br><span class="line"><span class="comment">&lt;!-- sn --&gt;</span></span><br><span class="line">订阅端</span><br><span class="line">func setup() &#123; ... &#125;</span><br><span class="line">&#123;% endbox %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>嵌套 tabs：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% box 标题 color:blue child:tabs %&#125;</span><br><span class="line"><span class="comment">&lt;!-- tab 标签1 --&gt;</span></span><br><span class="line">内容1</span><br><span class="line"><span class="comment">&lt;!-- tab 标签2 --&gt;</span></span><br><span class="line">内容2</span><br><span class="line">&#123;% endbox %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-2-folding-折叠容器"><a href="#4-2-folding-折叠容器" class="headerlink" title="4.2 folding 折叠容器"></a>4.2 folding 折叠容器</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% folding [标题] [codeblock:bool] [open:bool] [color:color] %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% endfolding %&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% folding open:true color:yellow 默认打开的代码折叠框 %&#125;</span><br><span class="line">代码</span><br><span class="line">&#123;% endfolding %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% folding 危险 color:error %&#125;</span><br><span class="line">警告内容</span><br><span class="line">&#123;% endfolding %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>颜色：<code>red</code>、<code>orange</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>purple</code>、<code>light</code>、<code>dark</code></p>
+<hr>
+<h3 id="4-3-folders-折叠聚合"><a href="#4-3-folders-折叠聚合" class="headerlink" title="4.3 folders 折叠聚合"></a>4.3 folders 折叠聚合</h3><p>适用于题目列表等多平铺折叠场景：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% folders %&#125;</span><br><span class="line"><span class="comment">&lt;!-- folder 题目1 --&gt;</span></span><br><span class="line">答案1</span><br><span class="line"><span class="comment">&lt;!-- folder 题目2 --&gt;</span></span><br><span class="line">答案2</span><br><span class="line"><span class="comment">&lt;!-- folder 题目3 --&gt;</span></span><br><span class="line">答案3</span><br><span class="line">&#123;% endfolders %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-4-tabs-分栏容器"><a href="#4-4-tabs-分栏容器" class="headerlink" title="4.4 tabs 分栏容器"></a>4.4 tabs 分栏容器</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% tabs 唯一ID, [active:1] %&#125;</span><br><span class="line"><span class="comment">&lt;!-- tab 标签1 --&gt;</span></span><br><span class="line">内容1</span><br><span class="line"><span class="comment">&lt;!-- tab 标签2 --&gt;</span></span><br><span class="line">内容2</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可选参数：<code>align:center</code></p>
+<hr>
+<h3 id="4-5-grid-网格分区"><a href="#4-5-grid-网格分区" class="headerlink" title="4.5 grid 网格分区"></a>4.5 grid 网格分区</h3><p><strong>动态列数（最小宽度240px）：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% grid %&#125;</span><br><span class="line"><span class="comment">&lt;!-- cell --&gt;</span></span><br><span class="line">cell 1</span><br><span class="line"><span class="comment">&lt;!-- cell --&gt;</span></span><br><span class="line">cell 2</span><br><span class="line"><span class="comment">&lt;!-- cell --&gt;</span></span><br><span class="line">cell 3</span><br><span class="line">&#123;% endgrid %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>固定列数：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% grid c:2 %&#125;...&#123;% endgrid %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置最小宽度：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% grid w:350px %&#125;...&#123;% endgrid %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>背景样式：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;% grid bg:box w:150px %&#125;   普通 Box 样式</span><br><span class="line">&#123;% grid bg:card w:150px %&#125;  可浮起的卡片样式</span><br><span class="line">&#123;% grid bg:card gap:32px %&#125;  设置间距</span><br><span class="line">&#123;% grid bg:card br:4px %&#125;    设置圆角</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-6-banner-横幅容器"><a href="#4-6-banner-横幅容器" class="headerlink" title="4.6 banner 横幅容器"></a>4.6 banner 横幅容器</h3><p><strong>独立页面顶部：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% banner 随记 bg:https://xxx.jpg %&#125;</span><br><span class="line">&#123;% navbar active:/notes/ [随记](/notes/) [收藏](/bookmark/) %&#125;</span><br><span class="line">&#123;% endbanner %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>个人资料页：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% banner 某某 这是简介 avatar:https://xxx.jpg bg:https://xxx.jpg %&#125;</span><br><span class="line">&#123;% endbanner %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>文章摘要卡片（可点击跳转）：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% banner 标题 描述 bg:https://xxx.jpg link:/blog/20221126/ %&#125;</span><br><span class="line">&#123;% endbanner %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-7-gallery-图库"><a href="#4-7-gallery-图库" class="headerlink" title="4.7 gallery 图库"></a>4.7 gallery 图库</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% gallery %&#125;</span><br><span class="line">![](https://xxx1.jpg)</span><br><span class="line">![](https://xxx2.jpg)</span><br><span class="line">![](https://xxx3.jpg)</span><br><span class="line">&#123;% endgallery %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-8-swiper-轮播容器"><a href="#4-8-swiper-轮播容器" class="headerlink" title="4.8 swiper 轮播容器"></a>4.8 swiper 轮播容器</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;% swiper %&#125;</span><br><span class="line">![](https://xxx1.jpg)</span><br><span class="line">![](https://xxx2.jpg)</span><br><span class="line">![](https://xxx3.jpg)</span><br><span class="line">&#123;% endswiper %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% swiper width:min %&#125;...&#123;% endswiper %&#125;   <span class="comment">&lt;!-- 25% 宽度 --&gt;</span></span><br><span class="line">&#123;% swiper width:max %&#125;...&#123;% endswiper %&#125;   <span class="comment">&lt;!-- 100% 宽度 --&gt;</span></span><br><span class="line">&#123;% swiper effect:cards %&#125;...&#123;% endswiper %&#125;</span><br><span class="line">&#123;% swiper effect:coverflow %&#125;...&#123;% endswiper %&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：一个页面只能设置一次 swiper，效果全局生效。</p>
+</blockquote>
+<hr>
+<h2 id="五、常用-front-matter-模板"><a href="#五、常用-front-matter-模板" class="headerlink" title="五、常用 front-matter 模板"></a>五、常用 front-matter 模板</h2><h3 id="技术文章模板"><a href="#技术文章模板" class="headerlink" title="技术文章模板"></a>技术文章模板</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">文章标题</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-04-12</span></span><br><span class="line"><span class="attr">tags:</span> [<span class="string">标签1</span>, <span class="string">标签2</span>]</span><br><span class="line"><span class="attr">description:</span> <span class="string">文章描述（SEO和摘要）</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">知识库</span></span><br><span class="line"></span><br><span class="line"><span class="attr">type:</span> <span class="string">tech</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="图文类文章模板"><a href="#图文类文章模板" class="headerlink" title="图文类文章模板"></a>图文类文章模板</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">标题</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-04-12</span></span><br><span class="line"><span class="attr">tags:</span> [<span class="string">标签</span>]</span><br><span class="line"><span class="attr">type:</span> <span class="string">story</span></span><br><span class="line"><span class="attr">poster:</span></span><br><span class="line">  <span class="attr">headline:</span> <span class="string">大标题</span></span><br><span class="line">  <span class="attr">caption:</span> <span class="string">描述文字</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="独立页面模板"><a href="#独立页面模板" class="headerlink" title="独立页面模板"></a>独立页面模板</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">页面标题</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-04-12</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">page</span></span><br><span class="line"><span class="attr">menu_id:</span> <span class="string">about</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、参考链接"><a href="#六、参考链接" class="headerlink" title="六、参考链接"></a>六、参考链接</h2><table>
+<thead>
+<tr>
+<th>链接</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://xaoxuu.com/wiki/stellar/">https://xaoxuu.com/wiki/stellar/</a></td>
+<td>官方文档首页</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://xaoxuu.com/wiki/stellar/pages/">https://xaoxuu.com/wiki/stellar/pages/</a></td>
+<td>文章与页面编写</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://xaoxuu.com/wiki/stellar/tag-plugins/">https://xaoxuu.com/wiki/stellar/tag-plugins/</a></td>
+<td>标签组件索引</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://xaoxuu.com/wiki/stellar/tag-plugins/express/">https://xaoxuu.com/wiki/stellar/tag-plugins/express/</a></td>
+<td>表达类组件（33+）</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://xaoxuu.com/wiki/stellar/tag-plugins/data/">https://xaoxuu.com/wiki/stellar/tag-plugins/data/</a></td>
+<td>数据类组件（8）</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://xaoxuu.com/wiki/stellar/tag-plugins/container/">https://xaoxuu.com/wiki/stellar/tag-plugins/container/</a></td>
+<td>容器类组件（8）</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://xaoxuu.com/wiki/stellar/front-matter/">https://xaoxuu.com/wiki/stellar/front-matter/</a></td>
+<td>front-matter 字段索引</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://weekdaycare.cn/posts/emoji-blob/">https://weekdaycare.cn/posts/emoji-blob/</a></td>
+<td>表情速查表</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://icon-sets.iconify.design/">https://icon-sets.iconify.design/</a></td>
+<td>Iconify 图标库</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/xaoxuu/star-vote">https://github.com/xaoxuu/star-vote</a></td>
+<td>vote&#x2F;rating 部署项目</td>
+</tr>
+</tbody></table>
+</article>
+
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2026/04/13/2026-04-13-%E6%A8%A1%E6%8B%9F%E7%9B%98%E8%AE%B0%E5%BD%95/">模拟盘记录 | 2026-04-13</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2026/04/10/2026-04-10-%E6%A8%A1%E6%8B%9F%E7%9B%98%E8%AE%B0%E5%BD%95/">模拟盘记录 | 2026-04-10</a></div></section></div>
+
+
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body giscus'>
+      
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="giscus" src="https://giscus.app/client.js" data-repo="Xinslive/MiniPix" data-repo-id="R_kgDOMQAqaA" data-category="Ideas" data-category-id="DIC_kwDOMQAqaM4C6qCE" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="1" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous"></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"></div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right"><div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Front-matter-%E5%AD%97%E6%AE%B5"><span class="toc-text">一、Front-matter 字段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Hexo-%E5%86%85%E7%BD%AE%E5%AD%97%E6%AE%B5"><span class="toc-text">1.1 Hexo 内置字段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Stellar-%E7%89%B9%E6%9C%89%E5%AD%97%E6%AE%B5"><span class="toc-text">1.2 Stellar 特有字段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%B0%81%E9%9D%A2%E4%B8%8E%E6%91%98%E8%A6%81"><span class="toc-text">1.3 封面与摘要</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%A1%A8%E8%BE%BE%E7%B1%BB%E6%A0%87%E7%AD%BE%E7%BB%84%E4%BB%B6%EF%BC%8833-%E4%B8%AA%EF%BC%89"><span class="toc-text">二、表达类标签组件（33+ 个）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-emoji-%E8%A1%A8%E6%83%85%E5%8C%85"><span class="toc-text">2.1 emoji 表情包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-icon-%E5%9B%BE%E6%A0%87"><span class="toc-text">2.2 icon 图标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-vote-%E6%8A%95%E7%A5%A8"><span class="toc-text">2.3 vote 投票</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-rating-%E8%AF%84%E5%88%86"><span class="toc-text">2.4 rating 评分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-mark-%E6%A0%87%E8%AE%B0%EF%BC%8812-%E8%89%B2%EF%BC%89"><span class="toc-text">2.5 mark 标记（12 色）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-hashtag-%E6%A0%87%E7%AD%BE"><span class="toc-text">2.6 hashtag 标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-image-%E5%9B%BE%E7%89%87"><span class="toc-text">2.7 image 图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-blockquote-%E6%AE%B5%E8%90%BD%E5%BC%95%E7%94%A8"><span class="toc-text">2.8 blockquote 段落引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9-quot-%E5%BC%BA%E8%B0%83%E5%BC%95%E7%94%A8"><span class="toc-text">2.9 quot 强调引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10-poetry-%E8%AF%97%E8%AF%8D"><span class="toc-text">2.10 poetry 诗词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-11-paper-%E7%BA%B8%E5%BC%A0"><span class="toc-text">2.11 paper 纸张</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-12-reel-%E5%8D%B7%E8%BD%B4"><span class="toc-text">2.12 reel 卷轴</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-13-note-%E5%A4%87%E6%B3%A8%E5%9D%97%EF%BC%8812-%E8%89%B2%EF%BC%89"><span class="toc-text">2.13 note 备注块（12 色）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-14-link-%E9%93%BE%E6%8E%A5%E5%8D%A1%E7%89%87"><span class="toc-text">2.14 link 链接卡片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-15-button-%E6%8C%89%E9%92%AE"><span class="toc-text">2.15 button 按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-16-okr-%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86"><span class="toc-text">2.16 okr 目标管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-17-copy-%E5%A4%8D%E5%88%B6%E8%A1%8C"><span class="toc-text">2.17 copy 复制行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-18-radio-%E5%8D%95%E9%80%89"><span class="toc-text">2.18 radio 单选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-19-checkbox-%E5%A4%8D%E9%80%89"><span class="toc-text">2.19 checkbox 复选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-20-audio-%E9%9F%B3%E9%A2%91"><span class="toc-text">2.20 audio 音频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-21-video-%E8%A7%86%E9%A2%91"><span class="toc-text">2.21 video 视频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-22-chat-%E8%81%8A%E5%A4%A9"><span class="toc-text">2.22 chat 聊天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-23-navbar-%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="toc-text">2.23 navbar 导航栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-24-frame-%E8%AE%BE%E5%A4%87%E6%A1%86%E6%9E%B6"><span class="toc-text">2.24 frame 设备框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-25-%E6%96%87%E6%9C%AC%E4%BF%AE%E9%A5%B0%E6%A0%87%E7%AD%BE%E9%9B%86"><span class="toc-text">2.25 文本修饰标签集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E6%A0%87%E7%AD%BE%E7%BB%84%E4%BB%B6%EF%BC%888-%E4%B8%AA%EF%BC%89"><span class="toc-text">三、数据类标签组件（8 个）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-timeline-%E6%97%B6%E9%97%B4%E7%BA%BF"><span class="toc-text">3.1 timeline 时间线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-friends-%E5%8F%8B%E9%93%BE"><span class="toc-text">3.2 friends 友链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-sites-%E7%BD%91%E7%AB%99%E5%8D%A1%E7%89%87"><span class="toc-text">3.3 sites 网站卡片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-albums-%E4%B8%93%E8%BE%91"><span class="toc-text">3.4 albums 专辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-posters-%E6%B5%B7%E6%8A%A5"><span class="toc-text">3.5 posters 海报</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-md-%E6%B8%B2%E6%9F%93%E5%A4%96%E9%83%A8-Markdown"><span class="toc-text">3.6 md 渲染外部 Markdown</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-ghcard-GitHub-%E5%8D%A1%E7%89%87"><span class="toc-text">3.7 ghcard GitHub 卡片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-toc-%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E6%A0%91"><span class="toc-text">3.8 toc 文档目录树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%B9%E5%99%A8%E7%B1%BB%E6%A0%87%E7%AD%BE%E7%BB%84%E4%BB%B6%EF%BC%888-%E4%B8%AA%EF%BC%89"><span class="toc-text">四、容器类标签组件（8 个）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-box-%E7%9B%92%E5%AD%90%E5%AE%B9%E5%99%A8"><span class="toc-text">4.1 box 盒子容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-folding-%E6%8A%98%E5%8F%A0%E5%AE%B9%E5%99%A8"><span class="toc-text">4.2 folding 折叠容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-folders-%E6%8A%98%E5%8F%A0%E8%81%9A%E5%90%88"><span class="toc-text">4.3 folders 折叠聚合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-tabs-%E5%88%86%E6%A0%8F%E5%AE%B9%E5%99%A8"><span class="toc-text">4.4 tabs 分栏容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-grid-%E7%BD%91%E6%A0%BC%E5%88%86%E5%8C%BA"><span class="toc-text">4.5 grid 网格分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-banner-%E6%A8%AA%E5%B9%85%E5%AE%B9%E5%99%A8"><span class="toc-text">4.6 banner 横幅容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-gallery-%E5%9B%BE%E5%BA%93"><span class="toc-text">4.7 gallery 图库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-swiper-%E8%BD%AE%E6%92%AD%E5%AE%B9%E5%99%A8"><span class="toc-text">4.8 swiper 轮播容器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%B8%B8%E7%94%A8-front-matter-%E6%A8%A1%E6%9D%BF"><span class="toc-text">五、常用 front-matter 模板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E6%A8%A1%E6%9D%BF"><span class="toc-text">技术文章模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E6%96%87%E7%B1%BB%E6%96%87%E7%AB%A0%E6%A8%A1%E6%9D%BF"><span class="toc-text">图文类文章模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8B%AC%E7%AB%8B%E9%A1%B5%E9%9D%A2%E6%A8%A1%E6%9D%BF"><span class="toc-text">独立页面模板</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">六、参考链接</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"closeEnable":true,"closeText":"关闭提示","originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  window.canonical["param"] = {"permalink":"https://blog.yeuer.com/2026/04/12/stellar%E7%BB%84%E4%BB%B6%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3/","checklink":"/js/plugins/video.js"};
+  // Fix: Ensure page is at the correct top position on data load
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'auto';
+  }
+  (function() {
+    const scrollHandler = () => {
+      const wikiCover = document.querySelector('#l_cover .l_cover.wiki');
+      const startEl = document.getElementById('start');
+      if (wikiCover && startEl) {
+        window.scrollTo(0, startEl.offsetTop);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
+    if (document.readyState !== 'loading') scrollHandler();
+    else document.addEventListener('DOMContentLoaded', scrollHandler);
+  })();
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      // 倒序遍历避免 splice 后的索引问题
+      for (let index = this.list.length - 1; index >= 0; index--) {
+        const e = this.list[index];
+        if (e.name === name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 已加载样式缓存
+    _loadedStyles: new Set(),
+
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      // 如果样式已加载，直接返回 null
+      if (utils._loadedStyles.has(href)) {
+        return null;
+      }
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      // 标记样式为已加载 (在创建元素后立即标记，防止重复创建)
+      utils._loadedStyles.add(href);
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 已加载脚本缓存
+    _loadedScripts: new Set(),
+
+    // 已加载元素缓存 (使用 WeakSet 追踪元素实例,避免 PJAX 导航时的状态混淆)
+    _loadedElements: new WeakSet(),
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      // 如果脚本已加载，直接返回
+      if (utils._loadedScripts.has(src)) {
+        resolve();
+        return;
+      }
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        utils._loadedScripts.add(src);
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // PJAX 事件监听器管理
+    _pjaxListeners: new Set(),
+    
+    jq: (fn, pjax = true) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+      if (pjax && !fn._pjax_registered) {
+        document.addEventListener('pjax:complete', fn);
+        fn._pjax_registered = true;
+        utils._pjaxListeners.add(fn); // 追踪监听器以便清理
+      }
+    },
+    
+    // 清理所有 PJAX 事件监听器
+    cleanupPjaxListeners: () => {
+      utils._pjaxListeners.forEach(fn => {
+        document.removeEventListener('pjax:complete', fn);
+        fn._pjax_registered = false;
+      });
+      utils._pjaxListeners.clear();
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        if ($(el).find('.loading-wrap').length === 0){
+          $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+        }
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      // 检查元素实例是否已加载 (而不是检查属性)
+      if (el && utils._loadedElements.has(el)) {
+        return;
+      }
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            // 标记元素实例为已加载
+            if (el) utils._loadedElements.add(el);
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+
+    // 插件初始化管理器 - 统一处理 DOMContentLoaded 和 pjax:complete 事件
+    _pluginInitializers: [],
+    _pluginCleanups: new Map(), // 存储每个插件的清理函数
+    
+    initPlugin: (initFn, name, options = {}) => {
+      if (!initFn || typeof initFn !== 'function') return;
+      
+      // 避免重复注册
+      const pluginName = name || initFn.name;
+      if (utils._pluginInitializers.some(p => p.name === pluginName)) return;
+      
+      // 包装初始化函数，添加防重复执行的保护
+      const wrappedInit = () => {
+        try {
+          // 在执行前先清理旧的资源
+          if (utils._pluginCleanups.has(pluginName)) {
+            const cleanup = utils._pluginCleanups.get(pluginName);
+            if (typeof cleanup === 'function') {
+              cleanup();
+            }
+          }
+          
+          // 执行初始化，可能返回清理函数
+          const cleanup = initFn();
+          
+          // 如果初始化函数返回了清理函数，保存它
+          if (typeof cleanup === 'function') {
+            utils._pluginCleanups.set(pluginName, cleanup);
+          }
+        } catch (error) {
+          console.error(`[Plugin ${pluginName}] 初始化失败:`, error);
+        }
+      };
+      
+      utils._pluginInitializers.push({ 
+        fn: wrappedInit, 
+        name: pluginName,
+        options: options 
+      });
+      
+      // 如果 DOM 已经加载完成，立即执行
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        wrappedInit();
+      } else {
+        // 否则等待 DOMContentLoaded
+        window.addEventListener('DOMContentLoaded', wrappedInit, { once: true });
+      }
+    },
+
+    // 重新初始化所有插件（用于 PJAX 等场景）
+    reinitPlugins: () => {
+      utils._pluginInitializers.forEach(plugin => {
+        // 跳过标记为不需要重新初始化的插件
+        if (plugin.options.skipReinit) return;
+        
+        try {
+          plugin.fn();
+        } catch (error) {
+          console.error(`[Plugin ${plugin.name}] 重新初始化失败:`, error);
+        }
+      });
+    },
+    
+    // 清理所有插件资源
+    cleanupPlugins: () => {
+      utils._pluginCleanups.forEach((cleanup, name) => {
+        try {
+          cleanup();
+        } catch (error) {
+          console.error(`[Plugin ${name}] 清理失败:`, error);
+        }
+      });
+      utils._pluginCleanups.clear();
+    },
+    
+    // 清理所有资源（用于页面卸载或重置）
+    cleanupAll: () => {
+      utils.cleanupPlugins();
+      utils.cleanupPjaxListeners();
+    },
+  };
+
+  // 自动处理 PJAX 事件
+  document.addEventListener('pjax:before', () => {
+    // 在导航前清理旧的 PJAX 监听器（如果需要重新注册）
+    // 注意：这里不清理，因为监听器应该是持久的
+    // utils.cleanupPjaxListeners();
+  });
+  
+  document.addEventListener('pjax:complete', () => {
+    utils.reinitPlugins();
+  });
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script>
+  (function() {
+    const lazyload = false;
+    
+    function initGiscus() {
+      const el = document.querySelector('#comments #giscus');
+      if (!el) return;
+      
+      function load_giscus() {
+        try {
+          el.innerHTML = '';
+        } catch (error) {
+          console.error(error);
+        }
+        const script = document.createElement('script');
+        script.async = true;
+        for (const key of Object.keys(el.attributes)) {
+          const attr = el.attributes[key];
+          if (['class', 'id'].includes(attr.name) === false) {
+            script.setAttribute(attr.name, attr.value);
+          }
+        }
+        el.appendChild(script);
+      }
+      
+      util.viewportLazyload(el, load_giscus, lazyload);
+    }
+    
+    // Store in global stellar namespace for PJAX reinitialization
+    window.stellar = window.stellar || {};
+    window.stellar.initComments = window.stellar.initComments || {};
+    window.stellar.initComments.giscus = initGiscus;
+    
+    // Initialize on page load
+    initGiscus();
+  })();
+</script>
+
+
+
+
+<script defer>
+  const initServices = () => {
+    // 用于存储需要清理的资源
+    let timers = [];
+    
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"},"rss":{"js":"/js/services/rss.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        const cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(cardlinks);
+          });
+        }
+      } else if (id == 'ghinfo') {
+        const els = document.querySelectorAll('.ds-ghinfo');
+        if (els.length > 0) {
+          utils.js(js, { defer: true });
+        }
+      } else if (id == 'voice') {
+        const voiceAudios = document.querySelectorAll('.voice>audio');
+        if (voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        const videos = document.querySelectorAll('.video>video');
+        if (videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        const files = document.querySelectorAll('.chat-file');
+        if (files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || id == 'memos' || id == 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          }, false);
+        }
+      }
+    }
+
+    // search
+    if (ctx.search && typeof searchFunc === 'function') {
+      const $inputArea = $("input#search-input");
+      if ($inputArea.length > 0 && !$inputArea[0]._searchInitialized) {
+        const path = ctx.search.path.startsWith('/') ? ctx.root + ctx.search.path.substring(1) : ctx.root + ctx.search.path;
+        const filter = $inputArea.attr('data-filter') || '';
+        searchFunc(path, filter, 'search-wrapper', 'search-input', 'search-result');
+        // 标记为已初始化，防止重复绑定
+        $inputArea[0]._searchInitialized = true;
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+    let firstAdjustInterval = null;
+    let mainInterval = null;
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      const date = new Date();
+      const sec = date.getSeconds();
+      firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+      timers.push(firstAdjustInterval);
+
+      function firstAdjustTime() {
+        NowTime();
+        if (firstAdjustInterval) {
+          clearInterval(firstAdjustInterval);
+          firstAdjustInterval = null;
+        }
+        mainInterval = setInterval(NowTime, 1000 * 60);
+        timers.push(mainInterval);
+      }
+
+      function NowTime() {
+        for (let i = 0; i < phoneTimes.length; ++i) {
+          const timeSpan = phoneTimes[i];
+          const date = new Date();
+          const hour = date.getHours();
+          const min = date.getMinutes();
+          timeSpan.innerHTML = check(hour) + ":" + check(min);
+        }
+      };
+
+      function check(val) {
+        if (val < 10) {
+          return ("0" + val);
+        }
+        return (val);
+      }
+    }
+
+    // chat quote - 存储事件监听器以便清理
+    const quoteClickHandlers = new Map();
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      const handler = function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      };
+      quote.addEventListener('click', handler);
+      quoteClickHandlers.set(quote, handler); // 保存处理器引用
+    });
+
+    // 返回清理函数，用于清理定时器和观察器
+    return () => {
+      // 清理所有定时器（包括可能未完成的 firstAdjustInterval）
+      timers.forEach(timer => {
+        if (timer) clearInterval(timer);
+      });
+      timers = [];
+      if (firstAdjustInterval) {
+        clearInterval(firstAdjustInterval);
+        firstAdjustInterval = null;
+      }
+      if (mainInterval) {
+        clearInterval(mainInterval);
+        mainInterval = null;
+      }
+      
+      // 断开观察器
+      if (chat_quote_obverser) {
+        chat_quote_obverser.disconnect();
+      }
+      
+      // 移除所有 click 事件监听器
+      quoteClickHandlers.forEach((handler, quote) => {
+        quote.removeEventListener('click', handler);
+      });
+      quoteClickHandlers.clear();
+    };
+  };
+
+  utils.initPlugin(initServices, 'services');
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  utils.initPlugin(() => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  }, 'swiper');
+</script>
+<script>
+  utils.initPlugin(() => {
+    const codeElements = document.querySelectorAll('.code');
+    if (codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js', { defer: true }).then(() => {
+        if (typeof createCopyButtons === 'function') {
+          createCopyButtons(codeElements);
+        }
+      });
+    }
+  }, 'copycode');
+</script>
+
+
+<!-- inject -->
+
+</div><div class="page-loading-bar"><img src="https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd"></div></body></html>
