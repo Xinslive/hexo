@@ -1,0 +1,1235 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  
+  
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>HuggingFace Space 部署 OpenClaw 指南 - 哈基米的知识库</title>
+
+  
+    <meta name="description" content="利用 HuggingFace Space 免费计算资源 + MiniMax API，零成本部署永久在线的 OpenClaw AI 助手。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HuggingFace Space 部署 OpenClaw 指南">
+<meta property="og:url" content="https://blog.yeuer.com/2026/04/14/2026-04-13-HuggingFace-Space-%E9%83%A8%E7%BD%B2-OpenClaw-%E6%8C%87%E5%8D%97/">
+<meta property="og:site_name" content="哈基米的知识库">
+<meta property="og:description" content="利用 HuggingFace Space 免费计算资源 + MiniMax API，零成本部署永久在线的 OpenClaw AI 助手。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-13T16:20:00.000Z">
+<meta property="article:author" content="哈基米">
+<meta property="article:tag" content="HuggingFace">
+<meta property="article:tag" content="OpenClaw">
+<meta property="article:tag" content="部署">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="OpenClaw,HuggingFace,部署">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"dateCreated":"2026-04-14T00:00:00+08:00","dateModified":"2026-04-14T00:20:00+08:00","datePublished":"2026-04-14T00:00:00+08:00","description":"白嫖 HuggingFace Space 的 2vCPU+16GB RAM 资源，配合 MiniMax 模型 API，搭一个 7×24 在线、永不失联的个人 AI 助手。","headline":"HuggingFace Space 部署 OpenClaw 指南","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.yeuer.com/2026/04/14/2026-04-13-HuggingFace-Space-%E9%83%A8%E7%BD%B2-OpenClaw-%E6%8C%87%E5%8D%97/"},"publisher":{"@type":"Organization","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"url":"https://blog.yeuer.com/2026/04/14/2026-04-13-HuggingFace-Space-%E9%83%A8%E7%BD%B2-OpenClaw-%E6%8C%87%E5%8D%97/","keywords":"OpenClaw, HuggingFace, 部署","image":[]}</script>
+  
+</head>
+<body><div id="l_cover"></div><div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/img/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">哈基米的知识库</div><div class="sub cap">记录与复盘</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2026/04/22/2026-04-21-%E6%A8%A1%E6%8B%9F%E7%9B%98%E6%9C%88%E5%BA%A6%E5%A4%8D%E7%9B%98/"><span class="title">模拟盘月度复盘 | 2026年4月</span></a><a class="item title" href="/2026/04/07/2026-04-07-%E7%82%92%E8%82%A1%E6%84%9F%E6%82%9F/"><span class="title">炒股至今领悟的两个道理</span></a><a class="item title" href="/2026/04/18/2026-04-18-Telemt%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/"><span class="title">Telemt 升级记录 | 2026-04-18</span></a><a class="item title" href="/2026/04/14/2026-04-13-HuggingFace-Space-%E9%83%A8%E7%BD%B2-OpenClaw-%E6%8C%87%E5%8D%97/"><span class="title">HuggingFace Space 部署 OpenClaw 指南</span></a><a class="item title" href="/2026/04/13/2026-04-13-openclaw%E6%A8%A1%E5%9E%8B%E7%99%BD%E5%90%8D%E5%8D%95%E9%85%8D%E7%BD%AE/"><span class="title">OpenClaw 模型白名单配置</span></a><a class="item title" href="/2026/04/12/stellar%E7%BB%84%E4%BB%B6%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3/"><span class="title">Stellar 主题组件参考文档</span></a><a class="item title" href="/2026/04/08/2026-04-08-telemt%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/"><span class="title">Telemt MTProxy 升级记录</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2026-04-13T16:00:00.000Z">2026-04-14</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-04-13T16:20:00.000Z">2026-04-14</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>HuggingFace Space 部署 OpenClaw 指南</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>OpenClaw 是一个强大的 AI 助手框架，但自建服务器成本不低。HuggingFace Space 提供免费 Docker 容器环境（2vCPU + 16GB RAM），足够跑起 OpenClaw 配合 MiniMax 模型，实现零成本 7×24 在线部署。</p>
+<p>本文记录完整部署流程，包含数据持久化（备份&#x2F;恢复）和关键的 HF Spaces 适配修改。</p>
+<!-- more -->
+
+<h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><table>
+<thead>
+<tr>
+<th>层级</th>
+<th>方案</th>
+<th>成本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>模型层</td>
+<td>MiniMax API（<code>api.xins.live</code>）</td>
+<td>参考 MiniMax 额度</td>
+</tr>
+<tr>
+<td>部署层</td>
+<td>HuggingFace Space（Docker）</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>持久化层</td>
+<td>HuggingFace Dataset 备份</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>保活层</td>
+<td>UptimeRobot 定时请求</td>
+<td>$0</td>
+</tr>
+</tbody></table>
+<h2 id="第一步：创建-HuggingFace-Space"><a href="#第一步：创建-HuggingFace-Space" class="headerlink" title="第一步：创建 HuggingFace Space"></a>第一步：创建 HuggingFace Space</h2><p>访问 <a target="_blank" rel="noopener" href="https://huggingface.co/spaces">hf.co&#x2F;spaces</a> → <strong>New Space</strong></p>
+<ul>
+<li><strong>SDK</strong>：选择 <code>Docker</code></li>
+<li><strong>Template</strong>：选择 <code>Blank</code></li>
+<li><strong>Privacy</strong>：选择 <code>Private</code>（保护个人数据）</li>
+</ul>
+<h2 id="第二步：创建-HuggingFace-Dataset"><a href="#第二步：创建-HuggingFace-Dataset" class="headerlink" title="第二步：创建 HuggingFace Dataset"></a>第二步：创建 HuggingFace Dataset</h2><p>在头像菜单 → <strong>New Dataset</strong>，创建私有数据集。<br>记下数据集名称，格式为 <code>username/dataset-name</code>。</p>
+<h2 id="第三步：生成-Access-Token"><a href="#第三步：生成-Access-Token" class="headerlink" title="第三步：生成 Access Token"></a>第三步：生成 Access Token</h2><p>头像菜单 → <strong>Access Tokens</strong> → <strong>New token</strong></p>
+<ul>
+<li><strong>Token Type</strong>：选择 <code>Write</code>（需要写入 Dataset）</li>
+</ul>
+<p>复制保存好 Token。</p>
+<h2 id="第四步：配置环境变量"><a href="#第四步：配置环境变量" class="headerlink" title="第四步：配置环境变量"></a>第四步：配置环境变量</h2><p>回到 Space 页面 → <strong>Settings</strong> → 找到 <strong>Variables and Secrets</strong>，添加以下变量：</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>取值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>OPENCLAW_GATEWAY_TOKEN</code></td>
+<td>自定义 Token</td>
+<td>用于登录 Web UI</td>
+</tr>
+<tr>
+<td><code>HF_DATASET</code></td>
+<td><code>username/dataset-name</code></td>
+<td>私有 Dataset 名称</td>
+</tr>
+<tr>
+<td><code>HF_TOKEN</code></td>
+<td>你的 HF Access Token</td>
+<td>Secret</td>
+</tr>
+</tbody></table>
+<h2 id="第五步：上传部署文件"><a href="#第五步：上传部署文件" class="headerlink" title="第五步：上传部署文件"></a>第五步：上传部署文件</h2><p>在 Space 的 <strong>Files</strong> 页面创建以下三个文件。</p>
+<h3 id="sync-py（数据持久化脚本）"><a href="#sync-py（数据持久化脚本）" class="headerlink" title="sync.py（数据持久化脚本）"></a>sync.py（数据持久化脚本）</h3><p>负责每次 Space 重启时从 HuggingFace Dataset 恢复数据，以及定期备份。支持 SHA256 校验、Gateway 重启跳过无变化备份、20 分钟超时。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> tarfile</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">from</span> huggingface_hub <span class="keyword">import</span> HfApi, hf_hub_download</span><br><span class="line"></span><br><span class="line">api = HfApi()</span><br><span class="line">repo_id = os.getenv(<span class="string">&quot;HF_DATASET&quot;</span>)</span><br><span class="line">token = os.getenv(<span class="string">&quot;HF_TOKEN&quot;</span>)</span><br><span class="line">FILENAME = <span class="string">&quot;latest_backup.tar.gz&quot;</span></span><br><span class="line">CHECKSUM_FILE = <span class="string">&quot;latest_backup.sha256&quot;</span></span><br><span class="line">BACKUP_TIMEOUT = <span class="number">1200</span>  <span class="comment"># 20 分钟</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calc_sha256</span>(<span class="params">filepath</span>):</span><br><span class="line">    h = hashlib.sha256()</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(filepath, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> chunk <span class="keyword">in</span> <span class="built_in">iter</span>(<span class="keyword">lambda</span>: f.read(<span class="number">65536</span>), <span class="string">b&quot;&quot;</span>):</span><br><span class="line">            h.update(chunk)</span><br><span class="line">    <span class="keyword">return</span> h.hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">restore</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[sync] restore() 开始&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  HF_DATASET: <span class="subst">&#123;repo_id&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  HF_TOKEN:   <span class="subst">&#123;<span class="string">&#x27;已设置&#x27;</span> <span class="keyword">if</span> token <span class="keyword">else</span> <span class="string">&#x27;未设置&#x27;</span>&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> repo_id <span class="keyword">or</span> <span class="keyword">not</span> token:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[sync] Skip Restore: HF_DATASET or HF_TOKEN not set&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ── 阶段 1：下载 &amp; 校验 ──</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[sync] 阶段 1/3：下载 &amp; 校验&quot;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  下载 <span class="subst">&#123;FILENAME&#125;</span> ...&quot;</span>)</span><br><span class="line">        path = hf_hub_download(</span><br><span class="line">            repo_id=repo_id,</span><br><span class="line">            filename=FILENAME,</span><br><span class="line">            repo_type=<span class="string">&quot;dataset&quot;</span>,</span><br><span class="line">            token=token,</span><br><span class="line">        )</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  下载完成: <span class="subst">&#123;os.path.getsize(path) / <span class="number">1024</span> / <span class="number">1024</span>:<span class="number">.1</span>f&#125;</span> MB&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  远程无备份或下载失败 (<span class="subst">&#123;<span class="built_in">type</span>(e).__name__&#125;</span>)，跳过恢复&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># tar 包完整性校验</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  校验 tar 包完整性 ...&quot;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> tarfile.<span class="built_in">open</span>(path, <span class="string">&quot;r:gz&quot;</span>) <span class="keyword">as</span> tar:</span><br><span class="line">            members = tar.getmembers()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  ✓ tar 包完整，<span class="subst">&#123;<span class="built_in">len</span>(members)&#125;</span> 个条目&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> tarfile.TarError <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  ✗ tar 包损坏: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># SHA256 二次校验</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  校验 SHA256 ...&quot;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        cs_path = hf_hub_download(repo_id=repo_id, filename=CHECKSUM_FILE,</span><br><span class="line">                                 repo_type=<span class="string">&quot;dataset&quot;</span>, token=token)</span><br><span class="line">        expected = <span class="built_in">open</span>(cs_path).read().strip()</span><br><span class="line">        actual = calc_sha256(path)</span><br><span class="line">        <span class="keyword">if</span> expected != actual:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;  ✗ SHA256 不匹配！expected=<span class="subst">&#123;expected[:<span class="number">16</span>]&#125;</span>..., actual=<span class="subst">&#123;actual[:<span class="number">16</span>]&#125;</span>...&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  ✓ SHA256 匹配&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  ! SHA256 校验跳过: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># ── 阶段 2：清空 &amp; 解压 ──</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[sync] 阶段 2/3：清空 &amp; 解压&quot;</span>)</span><br><span class="line">    target = <span class="string">&quot;/root/.openclaw&quot;</span></span><br><span class="line">    <span class="keyword">if</span> os.path.exists(target):</span><br><span class="line">        before = <span class="built_in">set</span>(os.listdir(target))</span><br><span class="line">        shutil.rmtree(target)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  已清空 <span class="subst">&#123;target&#125;</span>（<span class="subst">&#123;<span class="built_in">len</span>(before)&#125;</span> 项）&quot;</span>)</span><br><span class="line">    os.makedirs(target)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  解压到 /root/ ...&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> tarfile.<span class="built_in">open</span>(path, <span class="string">&quot;r:gz&quot;</span>) <span class="keyword">as</span> tar:</span><br><span class="line">        tar.extractall(path=<span class="string">&quot;/root&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  解压完成&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 恢复后文件列表</span></span><br><span class="line">    restored = <span class="built_in">sorted</span>(os.listdir(<span class="string">&quot;/root/.openclaw&quot;</span>))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[sync] ✓ 恢复成功，共 <span class="subst">&#123;<span class="built_in">len</span>(restored)&#125;</span> 项：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> restored:</span><br><span class="line">        m = os.stat(os.path.join(<span class="string">&quot;/root/.openclaw&quot;</span>, item)).st_mode &amp; <span class="number">0o777</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;    <span class="subst">&#123;<span class="built_in">oct</span>(m)[-<span class="number">3</span>:]&#125;</span>  <span class="subst">&#123;item&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">backup</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[sync] backup() 开始&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  HF_DATASET: <span class="subst">&#123;repo_id&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  HF_TOKEN:   <span class="subst">&#123;<span class="string">&#x27;已设置&#x27;</span> <span class="keyword">if</span> token <span class="keyword">else</span> <span class="string">&#x27;未设置&#x27;</span>&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> repo_id <span class="keyword">or</span> <span class="keyword">not</span> token:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[sync] Skip Backup: HF_DATASET or HF_TOKEN not set&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    src = <span class="string">&quot;/root/.openclaw&quot;</span></span><br><span class="line">    tmp_tar = <span class="string">&quot;/tmp/latest_backup.tar.gz&quot;</span></span><br><span class="line">    tmp_sha = <span class="string">&quot;/tmp/latest_backup.sha256&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[sync] 打包 <span class="subst">&#123;src&#125;</span> ...&quot;</span>)</span><br><span class="line">    tar_cmd = (</span><br><span class="line">        <span class="string">f&quot;cd /root &amp;&amp; tar --numeric-owner -czf <span class="subst">&#123;tmp_tar&#125;</span> &quot;</span></span><br><span class="line">        <span class="string">f&quot;.openclaw &gt; /dev/null 2&gt;&amp;1 &amp;&amp; echo OK&quot;</span></span><br><span class="line">    )</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  tar 命令执行中 (timeout=<span class="subst">&#123;BACKUP_TIMEOUT&#125;</span>s) ...&quot;</span>)</span><br><span class="line">    proc = subprocess.run(</span><br><span class="line">        tar_cmd,</span><br><span class="line">        shell=<span class="literal">True</span>,</span><br><span class="line">        capture_output=<span class="literal">True</span>,</span><br><span class="line">        text=<span class="literal">True</span>,</span><br><span class="line">        timeout=BACKUP_TIMEOUT</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">if</span> proc.returncode != <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[sync] ✗ tar 失败: <span class="subst">&#123;proc.stderr[:<span class="number">200</span>]&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    size_mb = os.path.getsize(tmp_tar) / <span class="number">1024</span> / <span class="number">1024</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  打包完成: <span class="subst">&#123;size_mb:<span class="number">.1</span>f&#125;</span> MB&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># SHA256</span></span><br><span class="line">    checksum = calc_sha256(tmp_tar)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(tmp_sha, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(checksum)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  SHA256: <span class="subst">&#123;checksum[:<span class="number">16</span>]&#125;</span>...&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 上传</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[sync] 上传 <span class="subst">&#123;FILENAME&#125;</span> (<span class="subst">&#123;size_mb:<span class="number">.1</span>f&#125;</span> MB) ...&quot;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        api.upload_file(</span><br><span class="line">            path_or_fileobj=tmp_tar,</span><br><span class="line">            path_in_repo=FILENAME,</span><br><span class="line">            repo_id=repo_id,</span><br><span class="line">            repo_type=<span class="string">&quot;dataset&quot;</span>,</span><br><span class="line">            token=token,</span><br><span class="line">        )</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  ✓ <span class="subst">&#123;FILENAME&#125;</span> 上传成功&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[sync] ✗ <span class="subst">&#123;FILENAME&#125;</span> 上传失败: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> f <span class="keyword">in</span> [tmp_tar, tmp_sha]:</span><br><span class="line">            <span class="keyword">if</span> os.path.exists(f):</span><br><span class="line">                os.remove(f)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[sync] Backup aborted&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        api.upload_file(</span><br><span class="line">            path_or_fileobj=tmp_sha,</span><br><span class="line">            path_in_repo=CHECKSUM_FILE,</span><br><span class="line">            repo_id=repo_id,</span><br><span class="line">            repo_type=<span class="string">&quot;dataset&quot;</span>,</span><br><span class="line">            token=token,</span><br><span class="line">        )</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  ✓ <span class="subst">&#123;CHECKSUM_FILE&#125;</span> 上传成功&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[sync] ✗ <span class="subst">&#123;CHECKSUM_FILE&#125;</span> 上传失败: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 清理</span></span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> [tmp_tar, tmp_sha]:</span><br><span class="line">        <span class="keyword">if</span> os.path.exists(f):</span><br><span class="line">            os.remove(f)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[sync] ✓ 备份完成: <span class="subst">&#123;FILENAME&#125;</span> (<span class="subst">&#123;size_mb:<span class="number">.1</span>f&#125;</span> MB)&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &gt; <span class="number">1</span> <span class="keyword">and</span> sys.argv[<span class="number">1</span>] == <span class="string">&quot;backup&quot;</span>:</span><br><span class="line">        backup()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        restore()</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键特性：</strong></p>
+<ul>
+<li><strong>SHA256 校验</strong>：备份上传 <code>latest_backup.sha256</code>，恢复时校验完整性</li>
+<li><strong>tar 输出屏蔽</strong>：<code>&gt; /dev/null 2&gt;&amp;1</code> 避免干扰日志，进程退出码判断成功与否</li>
+<li><strong>20 分钟超时</strong>：<code>tar</code> 打包设置 1200s 超时，适合大备份包</li>
+<li><strong>恢复跳过机制</strong>：远程无备份时直接跳过（<code>except</code> 捕获），不报错</li>
+<li><strong>恢复前清空</strong>：<code>shutil.rmtree</code> + <code>os.makedirs</code> 确保旧文件不残留</li>
+</ul>
+<h3 id="start-openclaw-sh（启动脚本）"><a href="#start-openclaw-sh（启动脚本）" class="headerlink" title="start-openclaw.sh（启动脚本）"></a>start-openclaw.sh（启动脚本）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line">python3 /app/sync.py restore</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份中已包含 openclaw.json，直接用它启动</span></span><br><span class="line"><span class="built_in">exec</span> openclaw gateway</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键适配点（相对于通用部署）：</strong></p>
+<ol>
+<li><p><strong><code>dangerouslyDisableDeviceAuth: true</code></strong><br>HF Spaces 是完全托管的环境，用户无法 SSH 进入容器运行 <code>openclaw pairing approve</code> 命令。开启此选项后，Web UI 配对验证被禁用，直接用 Token 登录。</p>
+</li>
+<li><p><strong><code>allowedOrigins</code> 限制来源</strong><br>只允许指定的 HF Space 域名访问控制台，防止 Token 泄露被滥用。需在 <code>openclaw.json</code> 中手动添加：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;gateway&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;controlUi&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;allowedOrigins&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;https://[username]-[spacename].hf.space&quot;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>OPENCLAW_GATEWAY_TOKEN</code> 替代密码</strong><br>不使用传统的 <code>OPENCLAW_GATEWAY_PASSWORD</code>，改用 Token 模式，值通过环境变量注入。</p>
+</li>
+<li><p><strong>MiniMax 模型配置</strong><br>在 <code>openclaw.json</code> 的 <code>models.providers</code> 中配置 <code>baseUrl: https://api.xins.live</code>，完整示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;models&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;mode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;replace&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;providers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;cloud&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;api&quot;</span><span class="punctuation">:</span> <span class="string">&quot;anthropic-messages&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;apiKey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;你的 MiniMax API Key&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;baseUrl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://api.xins.live&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;models&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MiniMax&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MiniMax&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;reasoning&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;contextWindow&quot;</span><span class="punctuation">:</span> <span class="number">200000</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;maxTokens&quot;</span><span class="punctuation">:</span> <span class="number">131072</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;cost&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;input&quot;</span><span class="punctuation">:</span> <span class="number">4.2</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;output&quot;</span><span class="punctuation">:</span> <span class="number">16.8</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;cacheRead&quot;</span><span class="punctuation">:</span> <span class="number">0.42</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;cacheWrite&quot;</span><span class="punctuation">:</span> <span class="number">2.625</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>bind: &quot;lan&quot;</code></strong><br>HF Space 容器内必须绑定 LAN 接口才能被外部访问。</p>
+</li>
+<li><p><strong>控制台模型白名单</strong><br>在 <code>openclaw.json</code> 的 <code>agents.defaults</code> 中通过 <code>models</code> 字段指定 Control UI 可选的模型列表：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;agents&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;defaults&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;models&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;cloud/MiniMax&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;minimax/MiniMax-M2.7-highspeed&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;loss/MiniMax&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Dockerfile（容器镜像配置）"><a href="#Dockerfile（容器镜像配置）" class="headerlink" title="Dockerfile（容器镜像配置）"></a>Dockerfile（容器镜像配置）</h3><p>完整的容器镜像配置，包含 .NET SDK（minimax-docx skill 用 OpenXML SDK）、Python 和 Node.js 依赖。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">22</span>-slim</span><br><span class="line"></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="comment"># 1. 系统依赖</span></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y --no-install-recommends \</span></span><br><span class="line"><span class="language-bash">    git openssh-client build-essential python3 python3-pip \</span></span><br><span class="line"><span class="language-bash">    g++ make ca-certificates curl wget gnupg \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置时区（上海）</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">ln</span> -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; <span class="built_in">echo</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span> &gt; /etc/timezone</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="comment"># 2. .NET SDK 8.0（minimax-docx skill 用 OpenXML SDK）</span></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> curl -fsSL https://packages.microsoft.com/keys/microsoft.asc \</span></span><br><span class="line"><span class="language-bash">    | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; curl -fsSL https://packages.microsoft.com/config/debian/12/prod.list \</span></span><br><span class="line"><span class="language-bash">    | <span class="built_in">tee</span> /etc/apt/sources.list.d/microsoft-prod.list \</span></span><br><span class="line"><span class="language-bash">    | grep -v <span class="string">&#x27;^#&#x27;</span> | grep -v <span class="string">&#x27;^$&#x27;</span> &gt; /dev/null \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; apt-get update \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; apt-get install -y --no-install-recommends dotnet-sdk-8.0 \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="comment"># 3. Python 依赖（skill 运行时所需）</span></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pip3 install --no-cache-dir --break-system-packages \</span></span><br><span class="line"><span class="language-bash">    <span class="string">&quot;huggingface_hub&gt;=0.23&quot;</span> \</span></span><br><span class="line"><span class="language-bash">    openpyxl reportlab pypdf beautifulsoup4 lxml requests uv</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="comment"># 4. Node.js 全局包（skill 运行时所需）</span></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install -g openclaw@latest --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g pptxgenjs --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g mmx-cli --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; <span class="built_in">ln</span> -sf /usr/local/lib/node_modules/openclaw/openclaw.mjs /usr/local/bin/openclaw</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="comment"># 5. Hexo 博客（可选）</span></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install -g hexo --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g hexo-deployer-aliyun-oss --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g hexo-generator-archive --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g hexo-generator-category --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g hexo-generator-index --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g hexo-generator-tag --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g hexo-renderer-marked --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g hexo-renderer-pug --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g hexo-renderer-ejs --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g hexo-renderer-stylus --unsafe-perm \</span></span><br><span class="line"><span class="language-bash"> &amp;&amp; npm install -g probe-image-size --unsafe-perm</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="comment"># 6. OpenClaw 工作目录</span></span><br><span class="line"><span class="comment"># ============================================================</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> sync.py .</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> start-openclaw.sh .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chmod</span> +x start-openclaw.sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ENV</span> PORT=<span class="number">7860</span> HOME=/root</span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">7860</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;./start-openclaw.sh&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ Microsoft APT 源添加时<strong>不要用 sed 删除 <code>arch=amd64</code></strong>，否则 prod.list 会变成 <code>deb [] https://...</code> 导致 apt 解析失败。直接 <code>tee</code> 原始文件即可，<code>node:22-slim</code> 默认支持多架构。</p>
+</blockquote>
+<blockquote>
+<p>⚠️ HF Spaces 容器内 npm 全局包的 <code>.bin</code> 目录不会自动创建，导致 <code>openclaw</code> 命令找不到。必须显式 <code>ln -sf</code> 创建符号链接到 <code>/usr/local/bin/</code>，这一步不能省略。</p>
+</blockquote>
+<blockquote>
+<p>⚠️ Hexo 阿里云 OSS 凭证<strong>不要写在 Dockerfile 里</strong>，改为在 HF Spaces Settings → Variables and Secrets 中配置以下环境变量（对应 <code>_config.yml</code> 的 <code>deploy:</code> 节点）：</p>
+<ul>
+<li><code>OSS_REGION</code> → <code>oss-cn-wuhan-lr</code></li>
+<li><code>OSS_ACCESS_KEY_ID</code> → 你的 Access Key ID</li>
+<li><code>OSS_ACCESS_KEY_SECRET</code> → 你的 Access Key Secret<br>部署完成后手动运行 <code>hexo g &amp;&amp; hexo deploy</code> 即可。</li>
+</ul>
+</blockquote>
+<h2 id="第六步：提交并验证"><a href="#第六步：提交并验证" class="headerlink" title="第六步：提交并验证"></a>第六步：提交并验证</h2><ul>
+<li>在 Space 的 Files 页面添加上述三个文件后 <strong>Commit</strong>，HF 自动触发构建</li>
+<li>点击 <strong>Logs</strong> 查看构建和运行状态</li>
+<li>日志出现以下信息说明部署成功：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">◇ Gateway connection ─────────────────────────────</span><br><span class="line">│ Gateway target: ws://10.108.65.42:7860</span><br><span class="line">│ Source: local lan 10.108.65.42</span><br><span class="line">│ Config: /root/.openclaw/openclaw.json</span><br><span class="line">│ Bind: lan</span><br></pre></td></tr></table></figure>
+
+<h2 id="第七步：配置-UptimeRobot-保活"><a href="#第七步：配置-UptimeRobot-保活" class="headerlink" title="第七步：配置 UptimeRobot 保活"></a>第七步：配置 UptimeRobot 保活</h2><p>HF Space 在 <strong>48 小时无访问</strong> 时会自动休眠。用 UptimeRobot 定时 ping 你的 Space URL 即可保持在线：</p>
+<ul>
+<li>Monitor Type：<code>HTTP(s)</code></li>
+<li>URL：<code>https://[username]-[spacename].hf.space/</code></li>
+<li>Monitoring Interval：5 分钟（免费版最小间隔）</li>
+</ul>
+<h2 id="登录与使用"><a href="#登录与使用" class="headerlink" title="登录与使用"></a>登录与使用</h2><p>在浏览器打开你的 Space URL，首次访问时 UI 显示”未连接”状态。<br>在登录界面输入 <code>OPENCLAW_GATEWAY_TOKEN</code> 设置的值，确认后状态变为 <strong>“Connected”</strong>。</p>
+<p>之后就可以正常与 AI 对话了。</p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="Q-部署后-Token-登录一直失败？"><a href="#Q-部署后-Token-登录一直失败？" class="headerlink" title="Q: 部署后 Token 登录一直失败？"></a>Q: 部署后 Token 登录一直失败？</h3><p>检查环境变量 <code>OPENCLAW_GATEWAY_TOKEN</code> 是否正确配置。另外确认 Space 日志里 config 是否写入了正确的 token。</p>
+<h3 id="Q-HF-Space-重启后数据丢失？"><a href="#Q-HF-Space-重启后数据丢失？" class="headerlink" title="Q: HF Space 重启后数据丢失？"></a>Q: HF Space 重启后数据丢失？</h3><p>确认 <code>HF_DATASET</code> 和 <code>HF_TOKEN</code> 环境变量配置正确。Space 首次部署时 <code>sync.py restore</code> 找不到备份文件是正常的（显示 Restore Note 即可），重新部署后下次重启就会自动恢复。</p>
+<h3 id="Q-openclaw-command-not-found？"><a href="#Q-openclaw-command-not-found？" class="headerlink" title="Q: openclaw: command not found？"></a>Q: <code>openclaw: command not found</code>？</h3><p>这是 HF Spaces 容器内 npm 全局包路径问题，表现为 Dockerfile 构建成功但启动脚本运行 <code>openclaw gateway</code> 时报错。原因是 npm 全局包的 <code>.bin</code> 目录在容器内没有自动创建，CLI 符号链接丢失。</p>
+<p><strong>修复方法</strong>：在 Dockerfile 第 4 步末尾加上：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;&amp; ln -sf /usr/local/lib/node_modules/openclaw/openclaw.mjs /usr/local/bin/openclaw</span><br></pre></td></tr></table></figure>
+<p>然后重新 Rebuild Space 即可。</p>
+<h3 id="Q-国内访问-HF-Space-速度慢？"><a href="#Q-国内访问-HF-Space-速度慢？" class="headerlink" title="Q: 国内访问 HF Space 速度慢？"></a>Q: 国内访问 HF Space 速度慢？</h3><p>可以用 Cloudflare Tunnel 或类似方案做反向代理改善访问速度。</p>
+<p><em>记录于 2026-04-14 00:14</em></p>
+</article>
+
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2026/04/18/2026-04-18-Telemt%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/">Telemt 升级记录 | 2026-04-18</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2026/04/13/2026-04-13-openclaw%E6%A8%A1%E5%9E%8B%E7%99%BD%E5%90%8D%E5%8D%95%E9%85%8D%E7%BD%AE/">OpenClaw 模型白名单配置</a></div></section></div>
+
+
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body giscus'>
+      
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="giscus" src="https://giscus.app/client.js" data-repo="Xinslive/MiniPix" data-repo-id="R_kgDOMQAqaA" data-category="Ideas" data-category-id="DIC_kwDOMQAqaM4C6qCE" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="1" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous"></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"></div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right"><div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="toc-text">整体架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%88%9B%E5%BB%BA-HuggingFace-Space"><span class="toc-text">第一步：创建 HuggingFace Space</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%88%9B%E5%BB%BA-HuggingFace-Dataset"><span class="toc-text">第二步：创建 HuggingFace Dataset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E7%94%9F%E6%88%90-Access-Token"><span class="toc-text">第三步：生成 Access Token</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">第四步：配置环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E4%B8%8A%E4%BC%A0%E9%83%A8%E7%BD%B2%E6%96%87%E4%BB%B6"><span class="toc-text">第五步：上传部署文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sync-py%EF%BC%88%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96%E8%84%9A%E6%9C%AC%EF%BC%89"><span class="toc-text">sync.py（数据持久化脚本）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#start-openclaw-sh%EF%BC%88%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%EF%BC%89"><span class="toc-text">start-openclaw.sh（启动脚本）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dockerfile%EF%BC%88%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="toc-text">Dockerfile（容器镜像配置）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5%EF%BC%9A%E6%8F%90%E4%BA%A4%E5%B9%B6%E9%AA%8C%E8%AF%81"><span class="toc-text">第六步：提交并验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E6%AD%A5%EF%BC%9A%E9%85%8D%E7%BD%AE-UptimeRobot-%E4%BF%9D%E6%B4%BB"><span class="toc-text">第七步：配置 UptimeRobot 保活</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-text">登录与使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-%E9%83%A8%E7%BD%B2%E5%90%8E-Token-%E7%99%BB%E5%BD%95%E4%B8%80%E7%9B%B4%E5%A4%B1%E8%B4%A5%EF%BC%9F"><span class="toc-text">Q: 部署后 Token 登录一直失败？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-HF-Space-%E9%87%8D%E5%90%AF%E5%90%8E%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1%EF%BC%9F"><span class="toc-text">Q: HF Space 重启后数据丢失？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-openclaw-command-not-found%EF%BC%9F"><span class="toc-text">Q: openclaw: command not found？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-%E5%9B%BD%E5%86%85%E8%AE%BF%E9%97%AE-HF-Space-%E9%80%9F%E5%BA%A6%E6%85%A2%EF%BC%9F"><span class="toc-text">Q: 国内访问 HF Space 速度慢？</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"closeEnable":true,"closeText":"关闭提示","originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  window.canonical["param"] = {"permalink":"https://blog.yeuer.com/2026/04/14/2026-04-13-HuggingFace-Space-%E9%83%A8%E7%BD%B2-OpenClaw-%E6%8C%87%E5%8D%97/","checklink":"/js/plugins/video.js"};
+  // Fix: Ensure page is at the correct top position on data load
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'auto';
+  }
+  (function() {
+    const scrollHandler = () => {
+      const wikiCover = document.querySelector('#l_cover .l_cover.wiki');
+      const startEl = document.getElementById('start');
+      if (wikiCover && startEl) {
+        window.scrollTo(0, startEl.offsetTop);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
+    if (document.readyState !== 'loading') scrollHandler();
+    else document.addEventListener('DOMContentLoaded', scrollHandler);
+  })();
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      // 倒序遍历避免 splice 后的索引问题
+      for (let index = this.list.length - 1; index >= 0; index--) {
+        const e = this.list[index];
+        if (e.name === name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 已加载样式缓存
+    _loadedStyles: new Set(),
+
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      // 如果样式已加载，直接返回 null
+      if (utils._loadedStyles.has(href)) {
+        return null;
+      }
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      // 标记样式为已加载 (在创建元素后立即标记，防止重复创建)
+      utils._loadedStyles.add(href);
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 已加载脚本缓存
+    _loadedScripts: new Set(),
+
+    // 已加载元素缓存 (使用 WeakSet 追踪元素实例,避免 PJAX 导航时的状态混淆)
+    _loadedElements: new WeakSet(),
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      // 如果脚本已加载，直接返回
+      if (utils._loadedScripts.has(src)) {
+        resolve();
+        return;
+      }
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        utils._loadedScripts.add(src);
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // PJAX 事件监听器管理
+    _pjaxListeners: new Set(),
+    
+    jq: (fn, pjax = true) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+      if (pjax && !fn._pjax_registered) {
+        document.addEventListener('pjax:complete', fn);
+        fn._pjax_registered = true;
+        utils._pjaxListeners.add(fn); // 追踪监听器以便清理
+      }
+    },
+    
+    // 清理所有 PJAX 事件监听器
+    cleanupPjaxListeners: () => {
+      utils._pjaxListeners.forEach(fn => {
+        document.removeEventListener('pjax:complete', fn);
+        fn._pjax_registered = false;
+      });
+      utils._pjaxListeners.clear();
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        if ($(el).find('.loading-wrap').length === 0){
+          $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+        }
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      // 检查元素实例是否已加载 (而不是检查属性)
+      if (el && utils._loadedElements.has(el)) {
+        return;
+      }
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            // 标记元素实例为已加载
+            if (el) utils._loadedElements.add(el);
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+
+    // 插件初始化管理器 - 统一处理 DOMContentLoaded 和 pjax:complete 事件
+    _pluginInitializers: [],
+    _pluginCleanups: new Map(), // 存储每个插件的清理函数
+    
+    initPlugin: (initFn, name, options = {}) => {
+      if (!initFn || typeof initFn !== 'function') return;
+      
+      // 避免重复注册
+      const pluginName = name || initFn.name;
+      if (utils._pluginInitializers.some(p => p.name === pluginName)) return;
+      
+      // 包装初始化函数，添加防重复执行的保护
+      const wrappedInit = () => {
+        try {
+          // 在执行前先清理旧的资源
+          if (utils._pluginCleanups.has(pluginName)) {
+            const cleanup = utils._pluginCleanups.get(pluginName);
+            if (typeof cleanup === 'function') {
+              cleanup();
+            }
+          }
+          
+          // 执行初始化，可能返回清理函数
+          const cleanup = initFn();
+          
+          // 如果初始化函数返回了清理函数，保存它
+          if (typeof cleanup === 'function') {
+            utils._pluginCleanups.set(pluginName, cleanup);
+          }
+        } catch (error) {
+          console.error(`[Plugin ${pluginName}] 初始化失败:`, error);
+        }
+      };
+      
+      utils._pluginInitializers.push({ 
+        fn: wrappedInit, 
+        name: pluginName,
+        options: options 
+      });
+      
+      // 如果 DOM 已经加载完成，立即执行
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        wrappedInit();
+      } else {
+        // 否则等待 DOMContentLoaded
+        window.addEventListener('DOMContentLoaded', wrappedInit, { once: true });
+      }
+    },
+
+    // 重新初始化所有插件（用于 PJAX 等场景）
+    reinitPlugins: () => {
+      utils._pluginInitializers.forEach(plugin => {
+        // 跳过标记为不需要重新初始化的插件
+        if (plugin.options.skipReinit) return;
+        
+        try {
+          plugin.fn();
+        } catch (error) {
+          console.error(`[Plugin ${plugin.name}] 重新初始化失败:`, error);
+        }
+      });
+    },
+    
+    // 清理所有插件资源
+    cleanupPlugins: () => {
+      utils._pluginCleanups.forEach((cleanup, name) => {
+        try {
+          cleanup();
+        } catch (error) {
+          console.error(`[Plugin ${name}] 清理失败:`, error);
+        }
+      });
+      utils._pluginCleanups.clear();
+    },
+    
+    // 清理所有资源（用于页面卸载或重置）
+    cleanupAll: () => {
+      utils.cleanupPlugins();
+      utils.cleanupPjaxListeners();
+    },
+  };
+
+  // 自动处理 PJAX 事件
+  document.addEventListener('pjax:before', () => {
+    // 在导航前清理旧的 PJAX 监听器（如果需要重新注册）
+    // 注意：这里不清理，因为监听器应该是持久的
+    // utils.cleanupPjaxListeners();
+  });
+  
+  document.addEventListener('pjax:complete', () => {
+    utils.reinitPlugins();
+  });
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script>
+  (function() {
+    const lazyload = false;
+    
+    function initGiscus() {
+      const el = document.querySelector('#comments #giscus');
+      if (!el) return;
+      
+      function load_giscus() {
+        try {
+          el.innerHTML = '';
+        } catch (error) {
+          console.error(error);
+        }
+        const script = document.createElement('script');
+        script.async = true;
+        for (const key of Object.keys(el.attributes)) {
+          const attr = el.attributes[key];
+          if (['class', 'id'].includes(attr.name) === false) {
+            script.setAttribute(attr.name, attr.value);
+          }
+        }
+        el.appendChild(script);
+      }
+      
+      util.viewportLazyload(el, load_giscus, lazyload);
+    }
+    
+    // Store in global stellar namespace for PJAX reinitialization
+    window.stellar = window.stellar || {};
+    window.stellar.initComments = window.stellar.initComments || {};
+    window.stellar.initComments.giscus = initGiscus;
+    
+    // Initialize on page load
+    initGiscus();
+  })();
+</script>
+
+
+
+
+<script defer>
+  const initServices = () => {
+    // 用于存储需要清理的资源
+    let timers = [];
+    
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"},"rss":{"js":"/js/services/rss.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        const cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(cardlinks);
+          });
+        }
+      } else if (id == 'ghinfo') {
+        const els = document.querySelectorAll('.ds-ghinfo');
+        if (els.length > 0) {
+          utils.js(js, { defer: true });
+        }
+      } else if (id == 'voice') {
+        const voiceAudios = document.querySelectorAll('.voice>audio');
+        if (voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        const videos = document.querySelectorAll('.video>video');
+        if (videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        const files = document.querySelectorAll('.chat-file');
+        if (files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || id == 'memos' || id == 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          }, false);
+        }
+      }
+    }
+
+    // search
+    if (ctx.search && typeof searchFunc === 'function') {
+      const $inputArea = $("input#search-input");
+      if ($inputArea.length > 0 && !$inputArea[0]._searchInitialized) {
+        const path = ctx.search.path.startsWith('/') ? ctx.root + ctx.search.path.substring(1) : ctx.root + ctx.search.path;
+        const filter = $inputArea.attr('data-filter') || '';
+        searchFunc(path, filter, 'search-wrapper', 'search-input', 'search-result');
+        // 标记为已初始化，防止重复绑定
+        $inputArea[0]._searchInitialized = true;
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+    let firstAdjustInterval = null;
+    let mainInterval = null;
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      const date = new Date();
+      const sec = date.getSeconds();
+      firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+      timers.push(firstAdjustInterval);
+
+      function firstAdjustTime() {
+        NowTime();
+        if (firstAdjustInterval) {
+          clearInterval(firstAdjustInterval);
+          firstAdjustInterval = null;
+        }
+        mainInterval = setInterval(NowTime, 1000 * 60);
+        timers.push(mainInterval);
+      }
+
+      function NowTime() {
+        for (let i = 0; i < phoneTimes.length; ++i) {
+          const timeSpan = phoneTimes[i];
+          const date = new Date();
+          const hour = date.getHours();
+          const min = date.getMinutes();
+          timeSpan.innerHTML = check(hour) + ":" + check(min);
+        }
+      };
+
+      function check(val) {
+        if (val < 10) {
+          return ("0" + val);
+        }
+        return (val);
+      }
+    }
+
+    // chat quote - 存储事件监听器以便清理
+    const quoteClickHandlers = new Map();
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      const handler = function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      };
+      quote.addEventListener('click', handler);
+      quoteClickHandlers.set(quote, handler); // 保存处理器引用
+    });
+
+    // 返回清理函数，用于清理定时器和观察器
+    return () => {
+      // 清理所有定时器（包括可能未完成的 firstAdjustInterval）
+      timers.forEach(timer => {
+        if (timer) clearInterval(timer);
+      });
+      timers = [];
+      if (firstAdjustInterval) {
+        clearInterval(firstAdjustInterval);
+        firstAdjustInterval = null;
+      }
+      if (mainInterval) {
+        clearInterval(mainInterval);
+        mainInterval = null;
+      }
+      
+      // 断开观察器
+      if (chat_quote_obverser) {
+        chat_quote_obverser.disconnect();
+      }
+      
+      // 移除所有 click 事件监听器
+      quoteClickHandlers.forEach((handler, quote) => {
+        quote.removeEventListener('click', handler);
+      });
+      quoteClickHandlers.clear();
+    };
+  };
+
+  utils.initPlugin(initServices, 'services');
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  utils.initPlugin(() => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  }, 'swiper');
+</script>
+<script>
+  utils.initPlugin(() => {
+    const codeElements = document.querySelectorAll('.code');
+    if (codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js', { defer: true }).then(() => {
+        if (typeof createCopyButtons === 'function') {
+          createCopyButtons(codeElements);
+        }
+      });
+    }
+  }, 'copycode');
+</script>
+
+
+<!-- inject -->
+
+</div><div class="page-loading-bar"><img src="https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd"></div></body></html>
