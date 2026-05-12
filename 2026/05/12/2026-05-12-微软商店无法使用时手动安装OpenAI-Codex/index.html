@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
   
-  <meta name="robots" content="noindex,follow">
+  
   <meta name="generator" content="Hexo 8.1.1">
   <meta http-equiv='x-dns-prefetch-control' content='on' />
   
@@ -17,22 +17,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
   <meta name="theme-color" content="#f9fafb">
-  <title>标签 - 哈基米的知识库</title>
+  <title>转载｜微软商店无法使用时，如何手动安装 OpenAI Codex？ - 哈基米的知识库</title>
 
   
-    <meta name="description" content="个人知识库与日记">
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="https://blog.yeuer.com/tags/">
+    <meta name="description" content="转载整理一篇关于微软商店不可用时，如何绕过商店界面，手动下载 OpenAI Codex 的 .msix 安装包，并使用 PowerShell 安装的踩坑记录。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="转载｜微软商店无法使用时，如何手动安装 OpenAI Codex？">
+<meta property="og:url" content="https://blog.yeuer.com/2026/05/12/2026-05-12-%E5%BE%AE%E8%BD%AF%E5%95%86%E5%BA%97%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%97%B6%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85OpenAI-Codex/">
 <meta property="og:site_name" content="哈基米的知识库">
-<meta property="og:description" content="个人知识库与日记">
+<meta property="og:description" content="转载整理一篇关于微软商店不可用时，如何绕过商店界面，手动下载 OpenAI Codex 的 .msix 安装包，并使用 PowerShell 安装的踩坑记录。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-12T08:34:04.632Z">
 <meta property="article:author" content="哈基米">
+<meta property="article:tag" content="MSIX">
+<meta property="article:tag" content="Microsoft Store">
+<meta property="article:tag" content="OpenAI Codex">
+<meta property="article:tag" content="PowerShell">
+<meta property="article:tag" content="Windows">
 <meta name="twitter:card" content="summary">
   
   
   
-  
+  <meta name="keywords" content="OpenAI Codex,Windows,Microsoft Store,PowerShell,MSIX">
 
   <!-- feed -->
   
@@ -44,10 +51,10 @@
 
   
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.yeuer.com","author":{"@type":"Person","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"name":"哈基米的知识库","description":"个人知识库与日记","url":"https://blog.yeuer.com"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"dateCreated":"2026-05-12T00:00:00+08:00","dateModified":"2026-05-12T16:34:04+08:00","datePublished":"2026-05-12T00:00:00+08:00","description":"当微软商店无法使用，双击 .msix 安装包又提示“文件系统错误(-2147219196)”时，可以绕过图形化安装链路：先通过 store.rg-adguard.net 解析微软商店真实下载链接，再使用 PowerShell 的 Add-AppxPackage 命令安装 OpenAI Codex。","headline":"转载｜微软商店无法使用时，如何手动安装 OpenAI Codex？","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.yeuer.com/2026/05/12/2026-05-12-%E5%BE%AE%E8%BD%AF%E5%95%86%E5%BA%97%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%97%B6%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85OpenAI-Codex/"},"publisher":{"@type":"Organization","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"url":"https://blog.yeuer.com/2026/05/12/2026-05-12-%E5%BE%AE%E8%BD%AF%E5%95%86%E5%BA%97%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%97%B6%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85OpenAI-Codex/","keywords":"OpenAI Codex, Windows, Microsoft Store, PowerShell, MSIX","image":[]}</script>
   
 </head>
-<body><div id="l_cover"></div><div class="l_body index" id="start" layout="tags" type="undefined" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+<body><div id="l_cover"></div><div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
 
 
 <header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/img/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">哈基米的知识库</div><div class="sub cap">记录与复盘</div></a></div></header>
@@ -59,116 +66,124 @@
 <div class="widgets">
 <div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
 
+
+
 <widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2026/05/12/2026-05-12-%E5%BE%AE%E8%BD%AF%E5%95%86%E5%BA%97%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%97%B6%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85OpenAI-Codex/"><span class="title">转载｜微软商店无法使用时，如何手动安装 OpenAI Codex？</span></a><a class="item title" href="/2026/05/06/2026-05-06-%E6%A8%A1%E6%8B%9F%E7%9B%98%E6%9C%88%E5%BA%A6%E5%A4%8D%E7%9B%98/"><span class="title">模拟盘月度复盘 | 2026年5月</span></a><a class="item title" href="/2026/05/02/2026-05-02-Telemt%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/"><span class="title">Telemt MTProxy 升级记录</span></a><a class="item title" href="/2026/04/22/2026-04-21-%E6%A8%A1%E6%8B%9F%E7%9B%98%E6%9C%88%E5%BA%A6%E5%A4%8D%E7%9B%98/"><span class="title">模拟盘月度复盘 | 2026年4月</span></a><a class="item title" href="/2026/04/07/2026-04-07-%E7%82%92%E8%82%A1%E6%84%9F%E6%82%9F/"><span class="title">炒股至今领悟的两个道理</span></a><a class="item title" href="/2026/04/14/2026-04-13-HuggingFace-Space-%E9%83%A8%E7%BD%B2-OpenClaw-%E6%8C%87%E5%8D%97/"><span class="title">HuggingFace Space 部署 OpenClaw 指南</span></a><a class="item title" href="/2026/04/13/2026-04-13-openclaw%E6%A8%A1%E5%9E%8B%E7%99%BD%E5%90%8D%E5%8D%95%E9%85%8D%E7%BD%AE/"><span class="title">OpenClaw 模型白名单配置</span></a><a class="item title" href="/2026/04/12/stellar%E7%BB%84%E4%BB%B6%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3/"><span class="title">Stellar 主题组件参考文档</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
 
-<header class="header mobile-only"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/img/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">哈基米的知识库</div><div class="sub cap">记录与复盘</div></a></div></header>
 
 
-  
-  
-  
 
-<div class="navbar top"><div class="navbar-blur"><div class="navbar-container"><nav class="post"><a href="/">近期发布</a><a href="/categories/">分类</a><a class="active" href="/tags/">标签</a><a href="/archives/">归档</a></nav></div></div></div>
-  <div class='post-list'>
-    <article class='' id='tags'>
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/">知识库</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2026-05-11T16:00:00.000Z">2026-05-12</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-05-12T08:34:04.632Z">2026-05-12</time></span></div></div></div>
+    
+    <div class="bottom only-title">
       
-        <a class='tag' href="/tags/%E5%A4%8D%E7%9B%98/">
-          <span class='name'>复盘</span>
-        </a>
+      <div class="text-area">
+        <h1 class="text title"><span>转载｜微软商店无法使用时，如何手动安装 OpenAI Codex？</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><blockquote>
+<p>本文为转载整理版，原文作者：程序员夏末。<br>原文地址：<a target="_blank" rel="noopener" href="https://jishuzhan.net/article/2047844923232288770">【踩坑记录 | 第一篇】微软商店无法使用时，如何手动安装 OpenAI Codex？附 <code>.msix</code> 文件系统错误解决方法</a><br>本文仅作个人知识库备份与排版整理，版权归原作者所有。</p>
+</blockquote>
+<h2 id="背景：微软商店不可用，-msix-双击安装失败"><a href="#背景：微软商店不可用，-msix-双击安装失败" class="headerlink" title="背景：微软商店不可用，.msix 双击安装失败"></a>背景：微软商店不可用，<code>.msix</code> 双击安装失败</h2><p>原作者遇到的问题是：电脑上的微软商店无法正常使用，部分系统组件也可能已经损坏，但暂时又不方便重装系统。</p>
+<p>在这种情况下，即使已经把 OpenAI Codex 的 <code>.msix</code> 安装包下载到本地，直接双击安装包也可能失败，并弹出类似下面的错误：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件系统错误(-2147219196)</span><br></pre></td></tr></table></figure>
+
+<p>这个错误看起来像是安装包损坏，但实际原因不一定在安装包本身。<code>.msix</code> 属于 Windows 应用分发体系的一部分，和微软商店、App Installer、应用部署服务等系统组件关系比较紧密。</p>
+<p>也就是说，只要你是通过“双击 <code>.msix</code> 文件”的方式安装，Windows 仍然会调用图形化安装链路。如果这条链路依赖的系统组件损坏、注册异常，或者微软商店相关功能本身不可用，就可能导致安装失败。</p>
+<p>所以解决思路是：<strong>不走微软商店，也不双击安装包，而是手动获取安装包后，用 PowerShell 直接部署。</strong></p>
+<h2 id="步骤一：手动获取-Codex-的-msix-安装包"><a href="#步骤一：手动获取-Codex-的-msix-安装包" class="headerlink" title="步骤一：手动获取 Codex 的 .msix 安装包"></a>步骤一：手动获取 Codex 的 <code>.msix</code> 安装包</h2><h3 id="1-打开微软商店链接解析站"><a href="#1-打开微软商店链接解析站" class="headerlink" title="1. 打开微软商店链接解析站"></a>1. 打开微软商店链接解析站</h3><p>浏览器打开：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://store.rg-adguard.net</span><br></pre></td></tr></table></figure>
+
+<p>这个网站可以根据微软商店链接解析出真实下载地址。</p>
+<h3 id="2-输入-OpenAI-Codex-的商店链接"><a href="#2-输入-OpenAI-Codex-的商店链接" class="headerlink" title="2. 输入 OpenAI Codex 的商店链接"></a>2. 输入 OpenAI Codex 的商店链接</h3><p>在输入框里粘贴下面这个链接：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://apps.microsoft.com/detail/9PLM9XGG6VKS</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-选择渠道"><a href="#3-选择渠道" class="headerlink" title="3. 选择渠道"></a>3. 选择渠道</h3><p>右侧下拉框选择：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Retail</span><br></pre></td></tr></table></figure>
+
+<p>然后点击查询，页面会返回一批可下载文件。</p>
+<h3 id="4-找到对应的-msix-文件"><a href="#4-找到对应的-msix-文件" class="headerlink" title="4. 找到对应的 .msix 文件"></a>4. 找到对应的 <code>.msix</code> 文件</h3><p>在返回结果中，找到 OpenAI Codex 对应的 <code>.msix</code> 安装包。原文中示例文件名类似：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OpenAI.Codex_26.415.3242.0_x64__2p2nqsd0c76g0.Msix</span><br></pre></td></tr></table></figure>
+
+<p>注意：实际看到的版本号可能不完全一样，这是正常的。只要应用名、架构和后缀类型能对上，一般就可以。</p>
+<p>如果直接点击下载没有反应，可能是浏览器拦截或链接格式问题。可以右键复制下载链接，再手动在最前面补上：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://</span><br></pre></td></tr></table></figure>
+
+<h2 id="步骤二：使用-PowerShell-安装"><a href="#步骤二：使用-PowerShell-安装" class="headerlink" title="步骤二：使用 PowerShell 安装"></a>步骤二：使用 PowerShell 安装</h2><p>下载完成后，不要双击 <code>.msix</code> 文件。打开 PowerShell，使用 <code>Add-AppxPackage</code> 安装。</p>
+<p>示例命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Add-AppxPackage</span> <span class="literal">-Path</span> <span class="string">&quot;C:\Users\52412\Desktop\GoogleDownload\OpenAI.Codex_26.415.3242.0_x64__2p2nqsd0c76g0.Msix&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>把路径替换成自己电脑上实际保存 <code>.msix</code> 文件的位置即可。</p>
+<h2 id="为什么-PowerShell-能装，双击却不行？"><a href="#为什么-PowerShell-能装，双击却不行？" class="headerlink" title="为什么 PowerShell 能装，双击却不行？"></a>为什么 PowerShell 能装，双击却不行？</h2><p>两种方式最终都是安装 <code>.msix</code>，但调用入口不完全一样：</p>
+<ul>
+<li>双击 <code>.msix</code>：更依赖 Windows 图形界面、文件关联、App Installer、商店相关组件。</li>
+<li><code>Add-AppxPackage</code>：直接调用 Windows 的应用包部署能力。</li>
+</ul>
+<p>如果前者依赖的图形化安装链路损坏，后者仍然有机会正常工作。</p>
+<p>这也是本文方法的核心：<strong>绕过已经出问题的商店&#x2F;图形安装入口，改用系统部署命令直接安装。</strong></p>
+<h2 id="安装后如何确认成功？"><a href="#安装后如何确认成功？" class="headerlink" title="安装后如何确认成功？"></a>安装后如何确认成功？</h2><p>如果 PowerShell 执行后没有明显红色报错，一般就说明安装已经完成。</p>
+<p>可以通过下面几种方式确认：</p>
+<ol>
+<li>打开开始菜单，搜索 <code>Codex</code></li>
+<li>查看是否出现 OpenAI Codex 应用</li>
+<li>启动应用，确认能否进入主界面</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>当微软商店不可用，并且双击 <code>.msix</code> 安装包提示：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件系统错误(-2147219196)</span><br></pre></td></tr></table></figure>
+
+<p>可以尝试这条路线：</p>
+<ol>
+<li>用 <code>store.rg-adguard.net</code> 解析 Codex 的微软商店真实下载链接</li>
+<li>下载对应的 <code>.msix</code> 安装包</li>
+<li>不要双击安装</li>
+<li>用 PowerShell 执行 <code>Add-AppxPackage -Path &quot;安装包路径&quot;</code></li>
+</ol>
+<p>这套方法适合微软商店损坏、App Installer 异常、<code>.msix</code> 图形化安装入口不可用的场景。</p>
+<hr>
+<p>原文地址：<a target="_blank" rel="noopener" href="https://jishuzhan.net/article/2047844923232288770">https://jishuzhan.net/article/2047844923232288770</a></p>
+</article>
+
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2026/05/06/2026-05-06-%E6%A8%A1%E6%8B%9F%E7%9B%98%E6%9C%88%E5%BA%A6%E5%A4%8D%E7%9B%98/">模拟盘月度复盘 | 2026年5月</a></div></section></div>
+
+
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body giscus'>
       
-        <a class='tag' href="/tags/OpenClaw/">
-          <span class='name'>OpenClaw</span>
-        </a>
-      
-        <a class='tag' href="/tags/%E6%A8%A1%E6%8B%9F%E7%9B%98/">
-          <span class='name'>模拟盘</span>
-        </a>
-      
-        <a class='tag' href="/tags/A%E8%82%A1/">
-          <span class='name'>A股</span>
-        </a>
-      
-        <a class='tag' href="/tags/%E6%9C%88%E5%BA%A6%E6%80%BB%E7%BB%93/">
-          <span class='name'>月度总结</span>
-        </a>
-      
-        <a class='tag' href="/tags/%E6%8A%95%E8%B5%84/">
-          <span class='name'>投资</span>
-        </a>
-      
-        <a class='tag' href="/tags/%E7%82%92%E8%82%A1/">
-          <span class='name'>炒股</span>
-        </a>
-      
-        <a class='tag' href="/tags/HuggingFace/">
-          <span class='name'>HuggingFace</span>
-        </a>
-      
-        <a class='tag' href="/tags/%E9%83%A8%E7%BD%B2/">
-          <span class='name'>部署</span>
-        </a>
-      
-        <a class='tag' href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-          <span class='name'>服务器</span>
-        </a>
-      
-        <a class='tag' href="/tags/Telegram/">
-          <span class='name'>Telegram</span>
-        </a>
-      
-        <a class='tag' href="/tags/MTProxy/">
-          <span class='name'>MTProxy</span>
-        </a>
-      
-        <a class='tag' href="/tags/Telemt/">
-          <span class='name'>Telemt</span>
-        </a>
-      
-        <a class='tag' href="/tags/OpenAI-Codex/">
-          <span class='name'>OpenAI Codex</span>
-        </a>
-      
-        <a class='tag' href="/tags/Windows/">
-          <span class='name'>Windows</span>
-        </a>
-      
-        <a class='tag' href="/tags/Microsoft-Store/">
-          <span class='name'>Microsoft Store</span>
-        </a>
-      
-        <a class='tag' href="/tags/PowerShell/">
-          <span class='name'>PowerShell</span>
-        </a>
-      
-        <a class='tag' href="/tags/MSIX/">
-          <span class='name'>MSIX</span>
-        </a>
-      
-        <a class='tag' href="/tags/%E9%85%8D%E7%BD%AE/">
-          <span class='name'>配置</span>
-        </a>
-      
-        <a class='tag' href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/">
-          <span class='name'>知识库</span>
-        </a>
-      
-        <a class='tag' href="/tags/Hexo/">
-          <span class='name'>Hexo</span>
-        </a>
-      
-        <a class='tag' href="/tags/Stellar/">
-          <span class='name'>Stellar</span>
-        </a>
-      
-    </article>
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="giscus" src="https://giscus.app/client.js" data-repo="Xinslive/MiniPix" data-repo-id="R_kgDOMQAqaA" data-category="Ideas" data-category-id="DIC_kwDOMQAqaM4C6qCE" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="1" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous"></div>
+
+    </section>
   </div>
 
 
+
 <footer class="page-footer footnote"><hr><div class="text"></div></footer>
-<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right"></aside><div class='float-panel'>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right"><div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%EF%BC%9A%E5%BE%AE%E8%BD%AF%E5%95%86%E5%BA%97%E4%B8%8D%E5%8F%AF%E7%94%A8%EF%BC%8C-msix-%E5%8F%8C%E5%87%BB%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5"><span class="toc-text">背景：微软商店不可用，.msix 双击安装失败</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E4%B8%80%EF%BC%9A%E6%89%8B%E5%8A%A8%E8%8E%B7%E5%8F%96-Codex-%E7%9A%84-msix-%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-text">步骤一：手动获取 Codex 的 .msix 安装包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%89%93%E5%BC%80%E5%BE%AE%E8%BD%AF%E5%95%86%E5%BA%97%E9%93%BE%E6%8E%A5%E8%A7%A3%E6%9E%90%E7%AB%99"><span class="toc-text">1. 打开微软商店链接解析站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BE%93%E5%85%A5-OpenAI-Codex-%E7%9A%84%E5%95%86%E5%BA%97%E9%93%BE%E6%8E%A5"><span class="toc-text">2. 输入 OpenAI Codex 的商店链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%80%89%E6%8B%A9%E6%B8%A0%E9%81%93"><span class="toc-text">3. 选择渠道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%89%BE%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84-msix-%E6%96%87%E4%BB%B6"><span class="toc-text">4. 找到对应的 .msix 文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8-PowerShell-%E5%AE%89%E8%A3%85"><span class="toc-text">步骤二：使用 PowerShell 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-PowerShell-%E8%83%BD%E8%A3%85%EF%BC%8C%E5%8F%8C%E5%87%BB%E5%8D%B4%E4%B8%8D%E8%A1%8C%EF%BC%9F"><span class="toc-text">为什么 PowerShell 能装，双击却不行？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%90%8E%E5%A6%82%E4%BD%95%E7%A1%AE%E8%AE%A4%E6%88%90%E5%8A%9F%EF%BC%9F"><span class="toc-text">安装后如何确认成功？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
   <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
   </button>
@@ -181,7 +196,7 @@
 
 <script type="text/javascript">
   window.canonical = {"closeEnable":true,"closeText":"关闭提示","originalHost":null,"officialHosts":["localhost"],"encoded":""};
-  window.canonical["param"] = {"permalink":null,"checklink":"/js/plugins/video.js"};
+  window.canonical["param"] = {"permalink":"https://blog.yeuer.com/2026/05/12/2026-05-12-%E5%BE%AE%E8%BD%AF%E5%95%86%E5%BA%97%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%97%B6%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85OpenAI-Codex/","checklink":"/js/plugins/video.js"};
   // Fix: Ensure page is at the correct top position on data load
   if (history.scrollRestoration) {
     history.scrollRestoration = 'auto';
@@ -817,6 +832,45 @@
 
 
 <!-- optional -->
+
+  <script>
+  (function() {
+    const lazyload = false;
+    
+    function initGiscus() {
+      const el = document.querySelector('#comments #giscus');
+      if (!el) return;
+      
+      function load_giscus() {
+        try {
+          el.innerHTML = '';
+        } catch (error) {
+          console.error(error);
+        }
+        const script = document.createElement('script');
+        script.async = true;
+        for (const key of Object.keys(el.attributes)) {
+          const attr = el.attributes[key];
+          if (['class', 'id'].includes(attr.name) === false) {
+            script.setAttribute(attr.name, attr.value);
+          }
+        }
+        el.appendChild(script);
+      }
+      
+      util.viewportLazyload(el, load_giscus, lazyload);
+    }
+    
+    // Store in global stellar namespace for PJAX reinitialization
+    window.stellar = window.stellar || {};
+    window.stellar.initComments = window.stellar.initComments || {};
+    window.stellar.initComments.giscus = initGiscus;
+    
+    // Initialize on page load
+    initGiscus();
+  })();
+</script>
+
 
 
 
