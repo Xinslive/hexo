@@ -17,26 +17,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
   <meta name="theme-color" content="#f9fafb">
-  <title>OpenClaw 模型白名单配置 - 哈基米的知识库</title>
+  <title>Windows 远程桌面 RDP 配置可信 SSL 证书 - 哈基米的知识库</title>
 
   
-    <meta name="description" content="通过 agents.defaults.models 配置 OpenClaw 模型选择器白名单">
+    <meta name="description" content="Windows 10&#x2F;11 专业版和 Windows Server 为远程桌面 RDP 绑定可信 SSL 证书的完整操作记录，包含证书准备、导入、私钥授权、指纹绑定和验证方法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenClaw 模型白名单配置">
-<meta property="og:url" content="https://blog.yeuer.com/2026/04/13/2026-04-13-openclaw%E6%A8%A1%E5%9E%8B%E7%99%BD%E5%90%8D%E5%8D%95%E9%85%8D%E7%BD%AE/">
+<meta property="og:title" content="Windows 远程桌面 RDP 配置可信 SSL 证书">
+<meta property="og:url" content="https://blog.yeuer.com/2026/05/17/2026-05-17-Windows-RDP-%E9%85%8D%E7%BD%AE%E5%8F%AF%E4%BF%A1SSL%E8%AF%81%E4%B9%A6/">
 <meta property="og:site_name" content="哈基米的知识库">
-<meta property="og:description" content="通过 agents.defaults.models 配置 OpenClaw 模型选择器白名单">
+<meta property="og:description" content="Windows 10&#x2F;11 专业版和 Windows Server 为远程桌面 RDP 绑定可信 SSL 证书的完整操作记录，包含证书准备、导入、私钥授权、指纹绑定和验证方法。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-04-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-12T17:14:54.000Z">
+<meta property="article:published_time" content="2026-05-17T02:11:00.000Z">
+<meta property="article:modified_time" content="2026-05-17T02:12:02.983Z">
 <meta property="article:author" content="哈基米">
-<meta property="article:tag" content="OpenClaw">
-<meta property="article:tag" content="配置">
+<meta property="article:tag" content="RDP">
+<meta property="article:tag" content="SSL">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="证书">
+<meta property="article:tag" content="远程桌面">
 <meta name="twitter:card" content="summary">
   
   
   
-  <meta name="keywords" content="OpenClaw,配置">
+  <meta name="keywords" content="Windows,RDP,SSL,证书,远程桌面">
 
   <!-- feed -->
   
@@ -48,7 +51,7 @@
 
   
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"dateCreated":"2026-04-13T00:00:00+08:00","dateModified":"2026-04-13T01:14:54+08:00","datePublished":"2026-04-13T00:00:00+08:00","description":"通过 agents.defaults.models 配置白名单，可以限制 UI 中可选择的模型范围，避免大量无关模型污染下拉列表。","headline":"OpenClaw 模型白名单配置","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.yeuer.com/2026/04/13/2026-04-13-openclaw%E6%A8%A1%E5%9E%8B%E7%99%BD%E5%90%8D%E5%8D%95%E9%85%8D%E7%BD%AE/"},"publisher":{"@type":"Organization","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"url":"https://blog.yeuer.com/2026/04/13/2026-04-13-openclaw%E6%A8%A1%E5%9E%8B%E7%99%BD%E5%90%8D%E5%8D%95%E9%85%8D%E7%BD%AE/","keywords":"OpenClaw, 配置","image":[]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"dateCreated":"2026-05-17T10:11:00+08:00","dateModified":"2026-05-17T10:12:02+08:00","datePublished":"2026-05-17T10:11:00+08:00","description":"Windows 远程桌面默认使用自签名证书，连接时容易出现证书不受信任提示。本文记录如何为 RDP 导入可信证书、授权私钥读取权限，并把证书指纹绑定到 RDP 监听器。","headline":"Windows 远程桌面 RDP 配置可信 SSL 证书","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.yeuer.com/2026/05/17/2026-05-17-Windows-RDP-%E9%85%8D%E7%BD%AE%E5%8F%AF%E4%BF%A1SSL%E8%AF%81%E4%B9%A6/"},"publisher":{"@type":"Organization","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"url":"https://blog.yeuer.com/2026/05/17/2026-05-17-Windows-RDP-%E9%85%8D%E7%BD%AE%E5%8F%AF%E4%BF%A1SSL%E8%AF%81%E4%B9%A6/","keywords":"Windows, RDP, SSL, 证书, 远程桌面","image":[]}</script>
   
 </head>
 <body><div id="l_cover"></div><div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
@@ -77,37 +80,130 @@
 <div class="article banner top">
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
-<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/">知识库</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2026-04-12T16:00:00.000Z">2026-04-13</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-04-12T17:14:54.000Z">2026-04-13</time></span></div></div></div>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2026-05-17T02:11:00.000Z">2026-05-17</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-05-17T02:12:02.983Z">2026-05-17</time></span></div></div></div>
     
     <div class="bottom only-title">
       
       <div class="text-area">
-        <h1 class="text title"><span>OpenClaw 模型白名单配置</span></h1>
+        <h1 class="text title"><span>Windows 远程桌面 RDP 配置可信 SSL 证书</span></h1>
         
       </div>
     </div>
     
   </div>
-  </div><article class="md-text content"><p>在使用 OpenClaw 时，如果通过 providers 配置了多个模型来源，UI 的模型选择器会显示所有可用模型，这在实际使用中会变得非常混乱。其实 OpenClaw 支持通过 <code>agents.defaults.models</code> 设置白名单，只显示你允许的模型。</p>
-<h2 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h2><p>在 OpenClaw 的 <code>openclaw.json</code> 中，找到 <code>agents.defaults</code> 节点，添加 <code>models</code> 字段：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;agents&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;defaults&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;model&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;primary&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cloud/MiniMax&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;models&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;cloud/MiniMax&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;minimax/MiniMax-M2.7-highspeed&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;loss/MiniMax&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;api/GPT&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>其中 key 的格式为 <code>&lt;provider&gt;/&lt;model&gt;</code>，对应 <code>models.json</code> 中定义的 provider 名称和模型 ID。<code>{}</code> 可以为空，也可以填入模型的默认参数。</p>
-<p>添加配置后重启 Gateway 即可生效：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openclaw gateway restart</span><br></pre></td></tr></table></figure>
-
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>配置完成后，UI 模型选择器只会显示白名单中的 4 个模型，其他通过 providers 接入的模型不再出现在下拉列表中，界面清爽很多。</p>
+  </div><article class="md-text content"><p>Windows 10&#x2F;11 专业版和 Windows Server 的远程桌面（RDP）默认会使用系统自动生成的自签名证书。这个证书虽然可以加密连接，但客户端无法确认它来自受信任的证书颁发机构，所以连接时经常会看到“证书来自不信任的证书验证机构”之类的警告。</p>
+<p>解决思路很简单：给这台 Windows 主机准备一张可信 SSL 证书，把证书导入到本地计算机证书存储区，然后把该证书绑定给 RDP 监听器使用。</p>
 <h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ul>
-<li>通过 <code>models.json</code> 的 <code>providers</code> 接入多个 API 时</li>
-<li>不希望用户随意切换到某些高成本或未配置好的模型时</li>
-<li>简化普通用户的模型选择范围时</li>
+<li>Windows 10&#x2F;11 专业版开启远程桌面；</li>
+<li>Windows Server 使用远程桌面管理；</li>
+<li>已经拥有一个可用于该主机名或域名的 SSL 证书；</li>
+<li>希望 RDP 连接时不再提示证书不受信任。</li>
 </ul>
-<p><em>记录于 2026-04-13</em></p>
+<blockquote>
+<p>注意：证书的域名要和你连接 RDP 时使用的主机名匹配。比如你用 <code>rdp.example.com</code> 连接远程桌面，那么证书也应该签发给 <code>rdp.example.com</code>。</p>
+</blockquote>
+<h2 id="准备证书"><a href="#准备证书" class="headerlink" title="准备证书"></a>准备证书</h2><p>RDP 最方便使用的是带私钥的 PFX&#x2F;P12 证书文件。</p>
+<p>如果你从云厂商申请证书，可以优先下载 Tomcat &#x2F; IIS &#x2F; PFX 这类格式，因为通常会直接包含证书和私钥。</p>
+<p>如果你手里是 PEM 证书和 KEY 私钥，可以用 OpenSSL 转成 PFX：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -<span class="built_in">export</span> \</span><br><span class="line">  -clcerts \</span><br><span class="line">  -<span class="keyword">in</span> fullchain.pem \</span><br><span class="line">  -inkey private.key \</span><br><span class="line">  -out rdp-cert.pfx</span><br></pre></td></tr></table></figure>
+
+<p>执行时会要求设置一个导出密码。后面导入证书时会用到这个密码。</p>
+<h2 id="导入到本地计算机证书存储"><a href="#导入到本地计算机证书存储" class="headerlink" title="导入到本地计算机证书存储"></a>导入到本地计算机证书存储</h2><p>在 Windows 上执行以下步骤：</p>
+<ol>
+<li>按 <code>Win + R</code> 打开“运行”；</li>
+<li>输入 <code>mmc</code>，打开“管理控制台”；</li>
+<li>点击顶部菜单：<strong>文件 → 添加&#x2F;删除管理单元</strong>；</li>
+<li>在左侧选择 <strong>证书</strong>，点击 <strong>添加</strong>；</li>
+<li>选择 <strong>计算机账户</strong>，点击 <strong>下一步</strong>；</li>
+<li>选择 <strong>本地计算机</strong>，点击 <strong>完成</strong>；</li>
+<li>回到管理单元列表后点击 <strong>确定</strong>。</li>
+</ol>
+<p>然后在左侧展开：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">证书（本地计算机） → 个人 → 证书</span><br></pre></td></tr></table></figure>
+
+<p>右键 <strong>证书</strong>，选择：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">所有任务 → 导入</span><br></pre></td></tr></table></figure>
+
+<p>按照向导选择前面准备好的 <code>.pfx</code> &#x2F; <code>.p12</code> 文件，输入导出密码，并把证书导入到本地计算机的个人证书存储区。</p>
+<p>导入完成后，应该可以在“个人 → 证书”里看到这张证书。</p>
+<h2 id="给-RDP-服务授予私钥读取权限"><a href="#给-RDP-服务授予私钥读取权限" class="headerlink" title="给 RDP 服务授予私钥读取权限"></a>给 RDP 服务授予私钥读取权限</h2><p>RDP 服务需要能读取证书私钥，否则即使证书导入成功，也可能无法正常绑定或使用。</p>
+<p>在证书管理器中：</p>
+<ol>
+<li>找到刚导入的证书；</li>
+<li>右键证书，选择 <strong>所有任务 → 管理私钥</strong>；</li>
+<li>添加用户：<code>NETWORK SERVICE</code>；</li>
+<li>给 <code>NETWORK SERVICE</code> 至少授予 <strong>读取</strong> 权限；</li>
+<li>保存退出。</li>
+</ol>
+<p>如果系统是中文界面，用户选择框里可以直接输入：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NETWORK SERVICE</span><br></pre></td></tr></table></figure>
+
+<p>然后点“检查名称”。系统识别后再确认。</p>
+<h2 id="获取证书指纹"><a href="#获取证书指纹" class="headerlink" title="获取证书指纹"></a>获取证书指纹</h2><p>双击证书，进入证书详情：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">详细信息 → 指纹</span><br></pre></td></tr></table></figure>
+
+<p>复制指纹内容。</p>
+<p>复制出来的指纹通常带空格，建议先去掉空格，最终得到一串连续的 SHA1 指纹，例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">‎ABCD1234ABCD1234ABCD1234ABCD1234ABCD1234</span><br></pre></td></tr></table></figure>
+
+<p>如果复制后开头有隐藏字符，也要删掉。最稳妥的做法是粘贴到纯文本编辑器里检查一遍，只保留十六进制字符。</p>
+<h2 id="绑定证书到-RDP-监听器"><a href="#绑定证书到-RDP-监听器" class="headerlink" title="绑定证书到 RDP 监听器"></a>绑定证书到 RDP 监听器</h2><p>以管理员身份打开 PowerShell，执行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$thumbprint</span> = <span class="string">&quot;替换为你的证书指纹&quot;</span></span><br><span class="line"><span class="variable">$path</span> = <span class="string">&quot;Win32_TSGeneralSetting.TerminalName=&#x27;RDP-tcp&#x27;&quot;</span></span><br><span class="line"><span class="built_in">Set-WmiInstance</span> <span class="literal">-Namespace</span> <span class="string">&quot;root\cimv2\TerminalServices&quot;</span> <span class="literal">-Path</span> <span class="variable">$path</span> <span class="literal">-Arguments</span> <span class="selector-tag">@</span>&#123;SSLCertificateSHA1Hash=<span class="variable">$thumbprint</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用传统 <code>wmic</code> 命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic /namespace:\\root\cimv2\TerminalServices PATH Win32_TSGeneralSetting <span class="built_in">Set</span> SSLCertificateSHA1Hash=<span class="string">&quot;替换为你的证书指纹&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>新版 Windows 里 <code>wmic</code> 已经逐步被弃用，如果可用，优先使用 PowerShell 的 <code>Set-WmiInstance</code>。</p>
+</blockquote>
+<h2 id="重启远程桌面服务"><a href="#重启远程桌面服务" class="headerlink" title="重启远程桌面服务"></a>重启远程桌面服务</h2><p>绑定完成后，建议重启 Remote Desktop Services，让配置立即生效。</p>
+<p>可以在管理员 PowerShell 中执行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Restart-Service</span> TermService <span class="literal">-Force</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：如果你当前就是通过 RDP 连进去的，重启该服务会短暂断开远程桌面连接。更稳妥的方式是在本机控制台或有备用连接方式时操作。</p>
+<h2 id="验证配置"><a href="#验证配置" class="headerlink" title="验证配置"></a>验证配置</h2><p>重新用域名连接 RDP：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdp.example.com</span><br></pre></td></tr></table></figure>
+
+<p>如果证书链完整、域名匹配、客户端信任该 CA，连接时就不应该再出现“不受信任的证书验证机构”警告。</p>
+<p>也可以在 Windows 上查询当前 RDP 证书指纹：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-WmiObject</span> <span class="literal">-Namespace</span> <span class="string">&quot;root\cimv2\TerminalServices&quot;</span> `</span><br><span class="line">  <span class="literal">-Class</span> Win32_TSGeneralSetting `</span><br><span class="line">  <span class="literal">-Filter</span> <span class="string">&quot;TerminalName=&#x27;RDP-tcp&#x27;&quot;</span> |</span><br><span class="line">  <span class="built_in">Select-Object</span> SSLCertificateSHA1Hash</span><br></pre></td></tr></table></figure>
+
+<p>输出的 <code>SSLCertificateSHA1Hash</code> 应该和刚才绑定的证书指纹一致。</p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="证书导入了，但绑定后仍然报错"><a href="#证书导入了，但绑定后仍然报错" class="headerlink" title="证书导入了，但绑定后仍然报错"></a>证书导入了，但绑定后仍然报错</h3><p>重点检查三件事：</p>
+<ol>
+<li>证书是否包含私钥；</li>
+<li><code>NETWORK SERVICE</code> 是否有私钥读取权限；</li>
+<li>指纹是否复制正确，尤其是空格和隐藏字符。</li>
+</ol>
+<h3 id="证书可信，但仍提示名称不匹配"><a href="#证书可信，但仍提示名称不匹配" class="headerlink" title="证书可信，但仍提示名称不匹配"></a>证书可信，但仍提示名称不匹配</h3><p>这通常是连接 RDP 时使用的地址和证书域名不一致。</p>
+<p>例如证书签发给：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdp.example.com</span><br></pre></td></tr></table></figure>
+
+<p>但你连接时用了：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.10</span><br></pre></td></tr></table></figure>
+
+<p>客户端就可能提示名称不匹配。解决办法是使用证书对应的域名连接，或者给证书添加正确的 SAN。</p>
+<h3 id="Let’s-Encrypt-证书能不能用？"><a href="#Let’s-Encrypt-证书能不能用？" class="headerlink" title="Let’s Encrypt 证书能不能用？"></a>Let’s Encrypt 证书能不能用？</h3><p>可以。只要证书链完整，并且能导出为带私钥的 PFX&#x2F;P12 文件，就可以用于 RDP。</p>
+<p>如果使用 Let’s Encrypt，需要注意证书有效期通常是 90 天，续期后还要同步更新 RDP 绑定。生产环境建议写自动化脚本处理续期、导入和绑定。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>RDP 证书配置的核心步骤是：</p>
+<ol>
+<li>准备带私钥的 PFX&#x2F;P12 证书；</li>
+<li>导入到“本地计算机 → 个人 → 证书”；</li>
+<li>给 <code>NETWORK SERVICE</code> 授予私钥读取权限；</li>
+<li>获取证书 SHA1 指纹；</li>
+<li>通过 WMI 把指纹写入 RDP 监听器；</li>
+<li>重启远程桌面服务并验证。</li>
+</ol>
+<p>配置完成后，RDP 连接体验会干净很多，也更适合长期暴露给固定管理入口使用。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://nwdan.com/tutorials/win-rdp-certificate-configurations.html">Windows专业版RDP远程桌面添加受信任的SSL证书</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/remote-desktop-listener-certificate-configurations">Remote Desktop listener certificate configurations - Microsoft Learn</a></li>
+</ul>
 </article>
 
 
-<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2026/04/14/2026-04-13-HuggingFace-Space-%E9%83%A8%E7%BD%B2-OpenClaw-%E6%8C%87%E5%8D%97/">HuggingFace Space 部署 OpenClaw 指南</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2026/04/12/stellar%E7%BB%84%E4%BB%B6%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3/">Stellar 主题组件参考文档</a></div></section></div>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2026/05/12/2026-05-12-%E5%BE%AE%E8%BD%AF%E5%95%86%E5%BA%97%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%97%B6%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85OpenAI-Codex/">转载｜微软商店无法使用时，如何手动安装 OpenAI Codex？</a></div></section></div>
 
 
 
@@ -134,7 +230,7 @@
 
 
 
-<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95"><span class="toc-text">配置方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C"><span class="toc-text">效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">适用场景</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E8%AF%81%E4%B9%A6"><span class="toc-text">准备证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E5%88%B0%E6%9C%AC%E5%9C%B0%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%81%E4%B9%A6%E5%AD%98%E5%82%A8"><span class="toc-text">导入到本地计算机证书存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%99-RDP-%E6%9C%8D%E5%8A%A1%E6%8E%88%E4%BA%88%E7%A7%81%E9%92%A5%E8%AF%BB%E5%8F%96%E6%9D%83%E9%99%90"><span class="toc-text">给 RDP 服务授予私钥读取权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%81%E4%B9%A6%E6%8C%87%E7%BA%B9"><span class="toc-text">获取证书指纹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E8%AF%81%E4%B9%A6%E5%88%B0-RDP-%E7%9B%91%E5%90%AC%E5%99%A8"><span class="toc-text">绑定证书到 RDP 监听器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E6%9C%8D%E5%8A%A1"><span class="toc-text">重启远程桌面服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E9%85%8D%E7%BD%AE"><span class="toc-text">验证配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E4%B9%A6%E5%AF%BC%E5%85%A5%E4%BA%86%EF%BC%8C%E4%BD%86%E7%BB%91%E5%AE%9A%E5%90%8E%E4%BB%8D%E7%84%B6%E6%8A%A5%E9%94%99"><span class="toc-text">证书导入了，但绑定后仍然报错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E4%B9%A6%E5%8F%AF%E4%BF%A1%EF%BC%8C%E4%BD%86%E4%BB%8D%E6%8F%90%E7%A4%BA%E5%90%8D%E7%A7%B0%E4%B8%8D%E5%8C%B9%E9%85%8D"><span class="toc-text">证书可信，但仍提示名称不匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Let%E2%80%99s-Encrypt-%E8%AF%81%E4%B9%A6%E8%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%9F"><span class="toc-text">Let’s Encrypt 证书能不能用？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
 </div></aside><div class='float-panel'>
   <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
@@ -148,7 +244,7 @@
 
 <script type="text/javascript">
   window.canonical = {"closeEnable":true,"closeText":"关闭提示","originalHost":null,"officialHosts":["localhost"],"encoded":""};
-  window.canonical["param"] = {"permalink":"https://blog.yeuer.com/2026/04/13/2026-04-13-openclaw%E6%A8%A1%E5%9E%8B%E7%99%BD%E5%90%8D%E5%8D%95%E9%85%8D%E7%BD%AE/","checklink":"/js/plugins/video.js"};
+  window.canonical["param"] = {"permalink":"https://blog.yeuer.com/2026/05/17/2026-05-17-Windows-RDP-%E9%85%8D%E7%BD%AE%E5%8F%AF%E4%BF%A1SSL%E8%AF%81%E4%B9%A6/","checklink":"/js/plugins/video.js"};
   // Fix: Ensure page is at the correct top position on data load
   if (history.scrollRestoration) {
     history.scrollRestoration = 'auto';
