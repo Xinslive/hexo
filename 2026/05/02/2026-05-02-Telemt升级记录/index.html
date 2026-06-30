@@ -20,15 +20,15 @@
   <title>Telemt MTProxy 升级记录 - 哈基米的知识库</title>
 
   
-    <meta name="description" content="Telemt MTProxy 升级记录，版本历程 3.3.35 → 3.3.39 → 3.4.3 → 3.4.10 → 3.4.11 → 3.4.12 → 3.4.13 → 3.4.15 → 3.4.16 → 3.4.17 → 3.4.18 → 3.4.19，含完整步骤和回滚方法">
+    <meta name="description" content="Telemt MTProxy 升级记录，版本历程 3.3.35 → 3.3.39 → 3.4.3 → 3.4.10 → 3.4.11 → 3.4.12 → 3.4.13 → 3.4.15 → 3.4.16 → 3.4.17 → 3.4.18 → 3.4.19 → 3.4.20 → 3.4.21 → 3.4.22，含完整步骤和回滚方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Telemt MTProxy 升级记录">
 <meta property="og:url" content="https://blog.yeuer.com/2026/05/02/2026-05-02-Telemt%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/">
 <meta property="og:site_name" content="哈基米的知识库">
-<meta property="og:description" content="Telemt MTProxy 升级记录，版本历程 3.3.35 → 3.3.39 → 3.4.3 → 3.4.10 → 3.4.11 → 3.4.12 → 3.4.13 → 3.4.15 → 3.4.16 → 3.4.17 → 3.4.18 → 3.4.19，含完整步骤和回滚方法">
+<meta property="og:description" content="Telemt MTProxy 升级记录，版本历程 3.3.35 → 3.3.39 → 3.4.3 → 3.4.10 → 3.4.11 → 3.4.12 → 3.4.13 → 3.4.15 → 3.4.16 → 3.4.17 → 3.4.18 → 3.4.19 → 3.4.20 → 3.4.21 → 3.4.22，含完整步骤和回滚方法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-05-02T01:52:00.000Z">
-<meta property="article:modified_time" content="2026-06-27T10:04:00.000Z">
+<meta property="article:modified_time" content="2026-06-30T10:16:00.000Z">
 <meta property="article:author" content="哈基米">
 <meta property="article:tag" content="MTProxy">
 <meta property="article:tag" content="Telegram">
@@ -50,7 +50,7 @@
 
   
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"dateCreated":"2026-05-02T09:52:00+08:00","dateModified":"2026-06-27T18:04:00+08:00","datePublished":"2026-05-02T09:52:00+08:00","description":"Telemt MTProxy 从 3.3.35 到 3.4.19 的完整升级记录，涵盖所有版本变更、升级步骤、校验方法和回滚操作。","headline":"Telemt MTProxy 升级记录","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.yeuer.com/2026/05/02/2026-05-02-Telemt%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/"},"publisher":{"@type":"Organization","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"url":"https://blog.yeuer.com/2026/05/02/2026-05-02-Telemt%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/","keywords":"服务器, Telegram, MTProxy, Telemt","image":[]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"dateCreated":"2026-05-02T09:52:00+08:00","dateModified":"2026-06-30T18:16:00+08:00","datePublished":"2026-05-02T09:52:00+08:00","description":"Telemt MTProxy 从 3.3.35 到 3.4.22 的完整升级记录，涵盖所有版本变更、升级步骤、校验方法和回滚操作。","headline":"Telemt MTProxy 升级记录","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.yeuer.com/2026/05/02/2026-05-02-Telemt%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/"},"publisher":{"@type":"Organization","name":"哈基米","sameAs":["https://github.com/xinslive","https://xins.live"]},"url":"https://blog.yeuer.com/2026/05/02/2026-05-02-Telemt%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/","keywords":"服务器, Telegram, MTProxy, Telemt","image":[]}</script>
   
 </head>
 <body><div id="l_cover"></div><div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
@@ -80,7 +80,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2026-05-02T01:52:00.000Z">2026-05-02</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-06-27T10:04:00.000Z">2026-06-27</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2026-05-02T01:52:00.000Z">2026-05-02</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-06-30T10:16:00.000Z">2026-06-30</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -142,8 +142,13 @@
 <td>3.4.15 → 3.4.19</td>
 <td>Mindestlohn → Tempolimit → Wiederholung → 3.4.19</td>
 </tr>
+<tr>
+<td>2026-06-30</td>
+<td>3.4.15 → 3.4.22</td>
+<td>Anerbietung → Hitzewelle → Klimaanlage → Recherchen</td>
+</tr>
 </tbody></table>
-<p><strong>当前版本: 3.4.19</strong></p>
+<p><strong>当前版本: 3.4.22</strong></p>
 <h2 id="升级步骤（通用模板）"><a href="#升级步骤（通用模板）" class="headerlink" title="升级步骤（通用模板）"></a>升级步骤（通用模板）</h2><p>以下步骤适用于每次升级，只需替换版本号即可。</p>
 <h3 id="1-检查当前版本"><a href="#1-检查当前版本" class="headerlink" title="1. 检查当前版本"></a>1. 检查当前版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i ~/.ssh/telemt_root root@23.106.156.34 <span class="string">&quot;/usr/bin/telemt --version&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -272,10 +277,56 @@
 </tr>
 <tr>
 <td>3.4.19</td>
-<td>—</td>
+<td>Anerbietung</td>
 <td>修复 config API 保存时损坏嵌套子表（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/843">#843</a>）；新增 <code>client_mss_bulk</code> — 仅对握手分片、bulk 数据恢复 MSS 以削减 pps（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/847">#847</a>）；Dockerfile 改进（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/837">#837</a>）；Advanced Relay Mode + 加固 KDF-Tuple + VersionD 安全填充预期更新 + 共享 MTProto 框架与 ME 地址 + 修复 config API 嵌套子表损坏 + 加固 flow sync 后的 masking 回退与 frame readers + 握手后提升 MSS 削减 pps + Bugfixes（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/851">#851</a>）</td>
 </tr>
+<tr>
+<td>3.4.20</td>
+<td>Hitzewelle</td>
+<td>修复 Docker 构建在 CI &#x2F; docker-compose build 变体下的 bug（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/859">#859</a>）；Synlimit V2 + 拆分 config loader helpers 到独立模块 + 恢复 ME D2C queue-drain flushing（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/863">#863</a>）</td>
+</tr>
+<tr>
+<td>3.4.21</td>
+<td>Klimaanlage</td>
+<td>恢复 ME writer 在初始代理请求绑定时使用的源 IP（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/864">#864</a>）</td>
+</tr>
+<tr>
+<td>3.4.22</td>
+<td>Recherchen</td>
+<td>Secure + VersionD Outbound Paddings 修复（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/865">#865</a>）</td>
+</tr>
 </tbody></table>
+<h2 id="2026-06-30：3-4-15-→-3-4-22-实操记录"><a href="#2026-06-30：3-4-15-→-3-4-22-实操记录" class="headerlink" title="2026-06-30：3.4.15 → 3.4.22 实操记录"></a>2026-06-30：3.4.15 → 3.4.22 实操记录</h2><ul>
+<li>升级前版本：<code>telemt 3.4.15</code></li>
+<li>升级后版本：<code>telemt 3.4.22</code></li>
+<li>下载包：<code>telemt-x86_64-linux-gnu.tar.gz</code></li>
+<li>SHA256：<code>ecc44fab46ae70b2b704224f25ee41f68503b50e17d0b3d5dd558a9280e1fd8f</code></li>
+<li>备份文件：<code>/usr/bin/telemt.bak.3.4.15</code></li>
+<li>服务状态：<code>active (running)</code></li>
+<li>监听端口：<code>0.0.0.0:443</code>、<code>127.0.0.1:9091</code></li>
+<li>启动日志：<code>MAESTRO: Telemt MTProxy v3.4.22</code></li>
+</ul>
+<blockquote>
+<p>一次性跨版本升级 3.4.15 → 3.4.22（含 3.4.16 Mindestlohn、3.4.17 Tempolimit、3.4.18 Wiederholung、3.4.19 Anerbietung、3.4.20 Hitzewelle、3.4.21 Klimaanlage 六个中间版本）。3.4.16&#x2F;17&#x2F;18 已在 <a href="#2026-06-273415--3419-%E5%AE%9E%E6%93%8D%E8%AE%B0%E5%BD%95">2026-06-27 实操记录</a> 中覆盖；本次重点关注 3.4.19 之后的三个版本（3.4.20&#x2F;21&#x2F;22）。3.4.20&#x2F;21&#x2F;22 均为 2026-06-29 当日连续发布，主干稳定线无破坏性变更，可直接升级到 3.4.22 而无需逐个版本回退验证。</p>
+</blockquote>
+<p>校验过程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> /tmp/telemt-3.4.22.tar.gz.sha256</span><br><span class="line">ecc44fab46ae70b2b704224f25ee41f68503b50e17d0b3d5dd558a9280e1fd8f  telemt-x86_64-linux-gnu.tar.gz</span><br><span class="line">$ <span class="built_in">sha256sum</span> /tmp/telemt-3.4.22.tar.gz</span><br><span class="line">ecc44fab46ae70b2b704224f25ee41f68503b50e17d0b3d5dd558a9280e1fd8f  /tmp/telemt-3.4.22.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>验证命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -i ~/.ssh/telemt_root root@23.106.156.34 <span class="string">&quot;/usr/bin/telemt --version &amp;&amp; systemctl is-active telemt.service&quot;</span></span><br><span class="line">ssh -i ~/.ssh/telemt_root root@23.106.156.34 <span class="string">&quot;ss -lntp | grep telemt&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>预期结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">telemt 3.4.22</span><br><span class="line">active</span><br><span class="line">LISTEN 0 1024  0.0.0.0:443</span><br><span class="line">LISTEN 0 128   127.0.0.1:9091</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-15-→-3-4-22-变更要点"><a href="#3-4-15-→-3-4-22-变更要点" class="headerlink" title="3.4.15 → 3.4.22 变更要点"></a>3.4.15 → 3.4.22 变更要点</h3><ul>
+<li><strong>3.4.16 Mindestlohn</strong>（2026-06-11）：新增 <code>PATCH/GET /v1/config</code> 编辑型 HTTP API；连续 3 个 PR 的 TLS 修复与升级；API + TLS-F 高级调优；速率限制文档改为以 bits per second 为单位；xray double hop 文档指纹更新。</li>
+<li><strong>3.4.17 Tempolimit</strong>（2026-06-11，Pre-release）：SYN 限流器（Netfilter control）+ TLS-F 句法密钥共享（syntactic key shares），用于对抗 SYN flood 与协议指纹识别。</li>
+<li><strong>3.4.18 Wiederholung</strong>（2026-06-12）：恢复单条记录 TLS-F 主应用 flight；修复 3.4.17 引入的 SYN 限流器生命周期与默认 burst 异常。</li>
+<li><strong>3.4.19 Anerbietung</strong>（2026-06-23）：修复 config API 保存时损坏嵌套子表的回归问题（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/843">#843</a>）；新增 <code>client_mss_bulk</code> — 仅对握手分片、bulk 数据恢复 MSS 以削减每秒包数（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/847">#847</a>）；Dockerfile 改进（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/837">#837</a>）；PR <a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/851">#851</a> 整合 Advanced Relay Mode、加固 KDF-Tuple、VersionD 安全填充预期更新、共享 MTProto framing 与 ME 地址、masking 回退与 frame readers 加固、握手后提升 MSS 削减 pps 及若干 bugfix。</li>
+<li><strong>3.4.20 Hitzewelle</strong>（2026-06-29）：修复 Docker 构建在 CI &#x2F; docker-compose build 变体下的 bug（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/859">#859</a>）；Synlimit V2 — 新一代 SYN 限流器，替换 3.4.17 Tempolimit 的早期实现；拆分 config loader helpers 到独立模块；恢复 ME D2C（DC-direct）的 queue-drain flushing，避免 ME 写端在突发流量下背压丢失（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/863">#863</a>）。新贡献者 <a target="_blank" rel="noopener" href="https://github.com/CryZFix">@CryZFix</a> 完成首次提交。</li>
+<li><strong>3.4.21 Klimaanlage</strong>（2026-06-29）：恢复 ME writer 在初始代理请求绑定时使用的源 IP（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/864">#864</a>）。该修复回归了与上游 DC 协商时 <code>bind()</code> 行为，影响部分双栈&#x2F;审计场景下的源地址呈现。</li>
+<li><strong>3.4.22 Recherchen</strong>（2026-06-29）：Secure + VersionD Outbound Paddings 修复（<a target="_blank" rel="noopener" href="https://github.com/telemt/telemt/pull/865">#865</a>）。校正 VersionD 协议下对外发送帧的填充长度计算，统一 Secure outbound padding 行为，避免在某些 MTProto 客户端上出现解析告警。</li>
+</ul>
 <h2 id="2026-06-27：3-4-15-→-3-4-19-实操记录"><a href="#2026-06-27：3-4-15-→-3-4-19-实操记录" class="headerlink" title="2026-06-27：3.4.15 → 3.4.19 实操记录"></a>2026-06-27：3.4.15 → 3.4.19 实操记录</h2><ul>
 <li>升级前版本：<code>telemt 3.4.15</code></li>
 <li>升级后版本：<code>telemt 3.4.19</code></li>
@@ -372,7 +423,7 @@
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">STATUS=active</span><br><span class="line">CWD=/var/lib/telemt</span><br><span class="line">LISTEN 0 1024 0.0.0.0:443</span><br><span class="line">LISTEN 0 128  127.0.0.1:9091</span><br></pre></td></tr></table></figure>
 
 <p>当前进程日志已不再出现 <code>beobachten</code> &#x2F; <code>telemt.limit.json</code> 的 Permission denied 警告。</p>
-<h2 id="回滚方法"><a href="#回滚方法" class="headerlink" title="回滚方法"></a>回滚方法</h2><p>当前版本为 3.4.19。如需回滚到上一版本（3.4.15）：</p>
+<h2 id="回滚方法"><a href="#回滚方法" class="headerlink" title="回滚方法"></a>回滚方法</h2><p>当前版本为 3.4.22。如需回滚到上一版本（3.4.15）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i ~/.ssh/telemt_root root@23.106.156.34 <span class="string">&quot;systemctl stop telemt.service &amp;&amp; cp /usr/bin/telemt.bak.3.4.15 /usr/bin/telemt &amp;&amp; chmod +x /usr/bin/telemt &amp;&amp; systemctl start telemt.service&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>如需回滚到更早的版本，请使用对应版本的备份文件。</p>
@@ -431,6 +482,18 @@
 <td>3.4.19</td>
 <td><code>ad0eac9ec15e0f1be266c0109764fbf2a2e8068554f50f413a0dd17b92706f3a</code></td>
 </tr>
+<tr>
+<td>3.4.20</td>
+<td><code>24073e53b62a28c92c2cd857982b166af268c4dc9d5732390ae9604540f07ca6</code></td>
+</tr>
+<tr>
+<td>3.4.21</td>
+<td><code>67b26619d381e925d8840d82bd7b425ba99909f25f00ca80d17912ebc746d75f</code></td>
+</tr>
+<tr>
+<td>3.4.22</td>
+<td><code>ecc44fab46ae70b2b704224f25ee41f68503b50e17d0b3d5dd558a9280e1fd8f</code></td>
+</tr>
 </tbody></table>
 <blockquote>
 <p>本记录由哈基米 🐱 维护，每次升级后更新。</p>
@@ -465,7 +528,7 @@
 
 
 
-<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E4%BF%A1%E6%81%AF"><span class="toc-text">环境信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E5%8E%86%E7%A8%8B"><span class="toc-text">版本历程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%87%E7%BA%A7%E6%AD%A5%E9%AA%A4%EF%BC%88%E9%80%9A%E7%94%A8%E6%A8%A1%E6%9D%BF%EF%BC%89"><span class="toc-text">升级步骤（通用模板）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A3%80%E6%9F%A5%E5%BD%93%E5%89%8D%E7%89%88%E6%9C%AC"><span class="toc-text">1. 检查当前版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9F%A5%E8%AF%A2%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC"><span class="toc-text">2. 查询最新版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A4%87%E4%BB%BD%E5%BD%93%E5%89%8D%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="toc-text">3. 备份当前二进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%B8%8B%E8%BD%BD%E5%B9%B6%E6%A0%A1%E9%AA%8C"><span class="toc-text">4. 下载并校验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%81%9C%E6%AD%A2%E6%9C%8D%E5%8A%A1%E5%B9%B6%E6%9B%BF%E6%8D%A2%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="toc-text">5. 停止服务并替换二进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%87%8D%E5%90%AF%E5%B9%B6%E9%AA%8C%E8%AF%81"><span class="toc-text">6. 重启并验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%B8%85%E7%90%86%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6"><span class="toc-text">7. 清理临时文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E5%8F%98%E6%9B%B4%E6%80%BB%E8%A1%A8"><span class="toc-text">版本变更总表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-x-%E7%B3%BB%E5%88%97"><span class="toc-text">3.3.x 系列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-x-%E7%B3%BB%E5%88%97"><span class="toc-text">3.4.x 系列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-06-27%EF%BC%9A3-4-15-%E2%86%92-3-4-19-%E5%AE%9E%E6%93%8D%E8%AE%B0%E5%BD%95"><span class="toc-text">2026-06-27：3.4.15 → 3.4.19 实操记录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-15-%E2%86%92-3-4-19-%E5%8F%98%E6%9B%B4%E8%A6%81%E7%82%B9"><span class="toc-text">3.4.15 → 3.4.19 变更要点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-06-06%EF%BC%9A3-4-13-%E2%86%92-3-4-15-%E5%AE%9E%E6%93%8D%E8%AE%B0%E5%BD%95"><span class="toc-text">2026-06-06：3.4.13 → 3.4.15 实操记录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-13-%E2%86%92-3-4-15-%E5%8F%98%E6%9B%B4%E8%A6%81%E7%82%B9"><span class="toc-text">3.4.13 → 3.4.15 变更要点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-05-30%EF%BC%9A3-4-11-%E2%86%92-3-4-13-%E5%AE%9E%E6%93%8D%E8%AE%B0%E5%BD%95"><span class="toc-text">2026-05-30：3.4.11 → 3.4.13 实操记录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-12-%E2%86%92-3-4-13-%E5%8F%98%E6%9B%B4%E8%A6%81%E7%82%B9"><span class="toc-text">3.4.12 → 3.4.13 变更要点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-05-17%EF%BC%9A3-4-10-%E2%86%92-3-4-11-%E5%AE%9E%E6%93%8D%E8%AE%B0%E5%BD%95"><span class="toc-text">2026-05-17：3.4.10 → 3.4.11 实操记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-05-17%EF%BC%9A%E5%A4%84%E7%90%86-beobachten-quota-state-%E6%9D%83%E9%99%90%E8%AD%A6%E5%91%8A"><span class="toc-text">2026-05-17：处理 beobachten &#x2F; quota state 权限警告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E6%BB%9A%E6%96%B9%E6%B3%95"><span class="toc-text">回滚方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E7%89%88%E6%9C%AC-SHA256-%E6%A0%A1%E9%AA%8C%E5%80%BC"><span class="toc-text">各版本 SHA256 校验值</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E4%BF%A1%E6%81%AF"><span class="toc-text">环境信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E5%8E%86%E7%A8%8B"><span class="toc-text">版本历程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%87%E7%BA%A7%E6%AD%A5%E9%AA%A4%EF%BC%88%E9%80%9A%E7%94%A8%E6%A8%A1%E6%9D%BF%EF%BC%89"><span class="toc-text">升级步骤（通用模板）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A3%80%E6%9F%A5%E5%BD%93%E5%89%8D%E7%89%88%E6%9C%AC"><span class="toc-text">1. 检查当前版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9F%A5%E8%AF%A2%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC"><span class="toc-text">2. 查询最新版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A4%87%E4%BB%BD%E5%BD%93%E5%89%8D%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="toc-text">3. 备份当前二进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%B8%8B%E8%BD%BD%E5%B9%B6%E6%A0%A1%E9%AA%8C"><span class="toc-text">4. 下载并校验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%81%9C%E6%AD%A2%E6%9C%8D%E5%8A%A1%E5%B9%B6%E6%9B%BF%E6%8D%A2%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="toc-text">5. 停止服务并替换二进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%87%8D%E5%90%AF%E5%B9%B6%E9%AA%8C%E8%AF%81"><span class="toc-text">6. 重启并验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%B8%85%E7%90%86%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6"><span class="toc-text">7. 清理临时文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E5%8F%98%E6%9B%B4%E6%80%BB%E8%A1%A8"><span class="toc-text">版本变更总表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-x-%E7%B3%BB%E5%88%97"><span class="toc-text">3.3.x 系列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-x-%E7%B3%BB%E5%88%97"><span class="toc-text">3.4.x 系列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-06-30%EF%BC%9A3-4-15-%E2%86%92-3-4-22-%E5%AE%9E%E6%93%8D%E8%AE%B0%E5%BD%95"><span class="toc-text">2026-06-30：3.4.15 → 3.4.22 实操记录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-15-%E2%86%92-3-4-22-%E5%8F%98%E6%9B%B4%E8%A6%81%E7%82%B9"><span class="toc-text">3.4.15 → 3.4.22 变更要点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-06-27%EF%BC%9A3-4-15-%E2%86%92-3-4-19-%E5%AE%9E%E6%93%8D%E8%AE%B0%E5%BD%95"><span class="toc-text">2026-06-27：3.4.15 → 3.4.19 实操记录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-15-%E2%86%92-3-4-19-%E5%8F%98%E6%9B%B4%E8%A6%81%E7%82%B9"><span class="toc-text">3.4.15 → 3.4.19 变更要点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-06-06%EF%BC%9A3-4-13-%E2%86%92-3-4-15-%E5%AE%9E%E6%93%8D%E8%AE%B0%E5%BD%95"><span class="toc-text">2026-06-06：3.4.13 → 3.4.15 实操记录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-13-%E2%86%92-3-4-15-%E5%8F%98%E6%9B%B4%E8%A6%81%E7%82%B9"><span class="toc-text">3.4.13 → 3.4.15 变更要点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-05-30%EF%BC%9A3-4-11-%E2%86%92-3-4-13-%E5%AE%9E%E6%93%8D%E8%AE%B0%E5%BD%95"><span class="toc-text">2026-05-30：3.4.11 → 3.4.13 实操记录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-12-%E2%86%92-3-4-13-%E5%8F%98%E6%9B%B4%E8%A6%81%E7%82%B9"><span class="toc-text">3.4.12 → 3.4.13 变更要点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-05-17%EF%BC%9A3-4-10-%E2%86%92-3-4-11-%E5%AE%9E%E6%93%8D%E8%AE%B0%E5%BD%95"><span class="toc-text">2026-05-17：3.4.10 → 3.4.11 实操记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-05-17%EF%BC%9A%E5%A4%84%E7%90%86-beobachten-quota-state-%E6%9D%83%E9%99%90%E8%AD%A6%E5%91%8A"><span class="toc-text">2026-05-17：处理 beobachten &#x2F; quota state 权限警告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E6%BB%9A%E6%96%B9%E6%B3%95"><span class="toc-text">回滚方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E7%89%88%E6%9C%AC-SHA256-%E6%A0%A1%E9%AA%8C%E5%80%BC"><span class="toc-text">各版本 SHA256 校验值</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
 </div></aside><div class='float-panel'>
   <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
